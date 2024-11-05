@@ -6,9 +6,9 @@
   <a href="https://www.npmjs.com/package/@govtechsg/token-registry" alt="NPM"><img src="https://img.shields.io/npm/dw/@govtechsg/token-registry" /></a>
   <img src="https://img.shields.io/github/license/open-attestation/token-registry" />
 
-用于应用系统/合约内格式化请求OpenDID Oracle合约方法的待验证数据。
+**用于应用系统/合约内格式化请求OpenDID Oracle合约方法的待验证数据。**
 
-整体格式：string(json(key1:value1,key2:value2,keyn:valuen)，以下是两个示例:
+整体格式：**string(json(key1:value1,key2:value2,key..n:value..n)**，以下是两个示例:
 
 - {"domain": "","signData": ""}
 - {"did": ""}
