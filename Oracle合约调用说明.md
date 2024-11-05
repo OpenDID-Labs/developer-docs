@@ -1,25 +1,22 @@
 # <img src="logo.svg" alt="OpenDID" height="40px">
 
-
-
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/CONTRIBUTING.html)
 [![Code Lines](https://tokei.rs/b1/github/WeBankBlockchain/WeBASE?category=code)](https://github.com/OpenDID-Labs/contracts)
 [![GitHub (pre-)release](https://img.shields.io/github/release/WeBankBlockchain/WeBASE/all.svg)](https://github.com/WeBankBlockchain/WeBASE/releases)
 [![license](http://img.shields.io/badge/license-Apache%20v2-red.svg)](http://www.apache.org/licenses/)
 [![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://docs.openzeppelin.com/contracts)
 
-
-**用于应用合约如何成功调用OpenDID Oracle合约。**OpenDID Oracle合约分别在Ethereum Mainnet、Polygon Mainnet、Aptos Mainnet网络上部署。
+**用于应用合约如何成功调用OpenDID Oracle合约。** OpenDID Oracle合约分别在Ethereum Mainnet、Polygon Mainnet、Aptos Mainnet 上部署。
 
  * Ethereum（合约地址）：[0x待补充](https://github.com/OpenDID-Labs)
  * Polygon（合约地址）： [0x待补充](https://github.com/OpenDID-Labs)
  * Aptos（合约地址）：[0x待补充](https://github.com/OpenDID-Labs) 
 
 
-:building_construction: **想要了解如何序列化OpenDID Oracle合约的data参数?** 请查看 [JobID参数定义](https://github.com/OpenDID-Labs) — 包含众多 ID System 不同 JobID 请求参数的格式化说明。
+:building_construction: **想要了解如何序列化OpenDID Oracle合约的data参数?** 请查看[JobID参数定义](https://github.com/OpenDID-Labs) — 包含众多ID System不同JobID请求参数的格式化说明。
 
 > [!IMPORTANT]
-> Ethereum和Polygon上的OpenDID Oracle合约，支持应用合约主动取消某笔还未得到验证结果的请求，取消后OpenDID Oracle会即时返还收取到的所有费用。Aptos上的OpenDID Oracle合约，暂不支持此操作。
+> OpenDID Oracle定义的费用，使用Oracle合约所在链的加密货币进行支付。Ethereum和Polygon上的OpenDID Oracle合约，支持应用合约主动取消某笔还未得到验证结果的请求，取消后OpenDID Oracle会即时返还收取到的所有费用。Aptos上的OpenDID Oracle合约，暂不支持此操作。
 
 ## 调用OpenDID Oracle合约
 
@@ -35,10 +32,8 @@ function quote(bytes32 jobId) external view returns (uint256);
 ```
 
 > [!WARNING]
-> jobId 可通过 [JobID参数定义] (https://github.com/OpenDID-Labs) 查看，不同的 jobID 对应的费用也不相同。
+> jobId 可通过[JobID参数定义](https://github.com/OpenDID-Labs)查看，不同的jobID对应的费用也不相同。
 
-> [!WARNING]
-> OpenDID Oracle 定义的费用，使用当前链的加密货币进行支付。
 
 #### 发送验证数据
 
@@ -106,10 +101,8 @@ public fun get_messaging_fees(job_id: vector<u8>): u64
 ```
 
 > [!WARNING]
-> job_id 可通过 [JobID参数定义] (https://github.com/OpenDID-Labs) 查看，不同的 job_id 对应的费用也不相同。
+> job_id可通过 [JobID参数定义](https://github.com/OpenDID-Labs) 查看，不同的job_id对应的费用也不相同。
 
-> [!WARNING]
-> OpenDID Oracle 定义的费用，使用当前链的加密货币进行支付。
 
 #### 发送验证数据
 
@@ -147,11 +140,8 @@ public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaC
 
 ```
 
-:mage: **不确定应用合约如何调用OpenDID Oracle合约?** 请查看 [应用合约示例] (https://github.com/OpenDID-Labs) — 一个可以直接使用的应用合约。
+:mage: **不确定应用合约如何调用OpenDID Oracle合约?** 请查看 [应用合约示例](https://github.com/OpenDID-Labs) — 一个可以直接使用的应用合约。
 
-## License
-
-OpenDID Oracle Contracts is released under the [MIT License](LICENSE).
 
 ## Legal
 
