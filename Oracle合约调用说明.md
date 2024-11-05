@@ -84,7 +84,7 @@ function cancelOracleRequest(
 #### 注册 UA
 UA 指应用合约内的任意 struct，但每个应用合约只能注册一个 UA。应用合约内可以通过以下方法注册 UA，并且保存返回的 UaCapability<UA>， 这将在后续的调用中使用。
 
-```
+```move
 public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 ```    
 
@@ -95,7 +95,7 @@ public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 #### 查询费用
 应用合约调用 OpenDID Oracle 合约的 get_messaging_fees 方法获取需要支付的费用。
 
-```
+```move
 public fun get_messaging_fees(job_id: vector<u8>): u64
 
 ```
@@ -108,7 +108,7 @@ public fun get_messaging_fees(job_id: vector<u8>): u64
 
 应用合约调用 OpenDID Oracle 合约的 oracle_request<UA> 方法发送待验证的数据。
 
-```
+```move
 public fun oracle_request<UA>(
     job_id: vector<u8>,
     callback_address: address,
@@ -129,14 +129,14 @@ public fun oracle_request<UA>(
 
 应用合约里面需实现接收 OpenDID Oracle 回送验证结果的方法。
 
-```
+```move
 public entry fun set_oracle_response(request_id: vector<u8>, data: String)
 
 ```
 
 应用合约收到验证结果后，必须调用 OpenDID Oracle 合约的 receive_response<UA> 方法进行验证。
 
-```
+```move
 public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaCapability<UA>)
 
 ```
