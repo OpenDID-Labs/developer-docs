@@ -82,14 +82,11 @@ function cancelOracleRequest(
 ### Aptos
 
 #### 注册 UA
-应用合约内可以通过以下方法注册 UA，并且保存返回的 UaCapability<UA>， 这将在后续的调用中使用。
+UA 指应用合约内的任意 struct，但每个应用合约只能注册一个 UA。应用合约内可以通过以下方法注册 UA，并且保存返回的 UaCapability<UA>， 这将在后续的调用中使用。
 
 ```
 public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 ```    
-
-> [!WARNING]
-> UA：应用合约内的任意 struct，每个应用合约只能注册一个 UA。
 
 > [!WARNING]
 > 必须在初始化方法中注册，这样才能验证你使用了自己合约的 UA。
