@@ -108,9 +108,6 @@ public fun get_messaging_fees(job_id: vector<u8>): u64
 
 应用合约调用 OpenDID Oracle 合约的 oracle_request<UA> 方法发送待验证的数据。
 
-> [!WARNING]
-> 必须填写接收验证结果的应用合约地址 callback_address 和模块名称 callback_module，并且指定不小于“查询费用”的 fee。
-
 ```
 public fun oracle_request<UA>(
     job_id: vector<u8>,
@@ -123,6 +120,10 @@ public fun oracle_request<UA>(
 ): (vector<u8>)
 
 ```
+
+> [!WARNING]
+> 必须填写接收验证结果的应用合约地址 callback_address 和模块名称 callback_module，并且指定不小于“查询费用”的 fee。
+
 
 #### 接收验证结果
 
