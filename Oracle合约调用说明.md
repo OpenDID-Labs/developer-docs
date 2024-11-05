@@ -76,6 +76,9 @@ function cancelOracleRequest(
 
 :mage: **不确定应用合约如何调用OpenDID Oracle合约?** 请查看 [应用合约示例](https://github.com/OpenDID-Labs) — 一个可以直接使用的应用合约。
 
+ * Ethereum（应用合约地址）：[0x待补充](待补充浏览器地址)
+ * Polygon（应用合约地址）： [0x待补充](待补充浏览器地址)
+
 ### Aptos
 
 #### 注册 UA
@@ -142,6 +145,7 @@ public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaC
 
 :mage: **不确定应用合约如何调用OpenDID Oracle合约?** 请查看 [应用合约示例](https://github.com/OpenDID-Labs) — 一个可以直接使用的应用合约。
 
+ * Aptos（应用合约地址）：[0x待补充](待补充浏览器地址) 
 
 ## Legal
 
