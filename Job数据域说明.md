@@ -71,7 +71,8 @@
 
 - 业务分类：Account Holder Authentication Service
 
-- 参考资料：https://terminal3.readme.io/reference/get-user-wallet-addresses（Get Wallet Addresses）
+- 参考资料：https://terminal3.readme.io/reference/get-user-wallet-addresses
+  (Get Wallet Addresses）
 
 - Oracle Request Data：
 
@@ -125,17 +126,20 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference（getPassport）
+- 参考资料：https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference
+  （getPassport）
 
 - Oracle Request Data：
 
-|       名称     |     类型    |      必传  |         描述                            |
-| ---------|- -------|--------|------------------------|
+|       名称     |     类型    |      必传  |         描述    |
+| ------------------| ----------|----------| ----------------------|
 | `address `   | string      |       Y     |   用户链账户地址                  |
 | `signature`  | string      |       Y     |   用户私钥对address的签名值   |
 
 
+
 - Oracle Response Data：
+
 
 |       名称     |     类型    |      必传  |         描述              |
 | --------------|-------------|-----------|--------------------------|
@@ -154,7 +158,8 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.ens.domains/learn/deployments（owner）
+- 参考资料：https://docs.ens.domains/learn/deployments
+  （owner）
 
 - Oracle Request Data：
 
@@ -183,7 +188,8 @@
 
 - 业务分类：Encrypted PII Verification Service 
 
-- 参考资料：https://docs.privado.id/docs/smart-contracts（isProofVerified）
+- 参考资料：https://docs.privado.id/docs/smart-contracts
+  （isProofVerified）
 
 - Oracle Request Data：
 
@@ -212,7 +218,8 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.hashkey.id/protocol/deployments（addrClaimed）
+- 参考资料：https://docs.hashkey.id/protocol/deployments
+  （addrClaimed）
 
 - Oracle Request Data：
 
@@ -238,7 +245,8 @@
 
 - 业务分类：DID Document Retrieval Service
 
-- 参考资料：https://docs.hashkey.id/developers/api-reference/openapi（Get DID info）
+- 参考资料：https://docs.hashkey.id/developers/api-reference/openapi
+  （Get DID info）
 
 - Oracle Request Data：
 
@@ -267,7 +275,8 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator（validate）
+- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator
+  （validate）
 
 - Oracle Request Data：
 
@@ -296,7 +305,8 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 - 业务分类：identity Registration Service
 
-- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/id-gateway（registerFor）
+- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/id-gateway
+  （registerFor）
 
 - Oracle Request Data：
 
@@ -327,7 +337,8 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.world.org/world-id/reference/contracts（verifyProof）
+- 参考资料：https://docs.world.org/world-id/reference/contracts
+  （verifyProof）
 
 - Oracle Request Data：
 
