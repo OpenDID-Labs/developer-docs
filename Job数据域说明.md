@@ -71,8 +71,7 @@
 
 - 业务分类：Account Holder Authentication Service
 
-- 参考资料：https://terminal3.readme.io/reference/get-user-wallet-addresses
-  (Get Wallet Addresses）
+- 参考资料：Terminal3 Identity [Get Wallet Addresses](https://terminal3.readme.io/reference/get-user-wallet-addresses)方法。
 
 - Oracle Request Data：
 
@@ -89,7 +88,7 @@
 |          result          | boolean           |       Y         |    验证结果          |
 
 
-### 验证用户DID签发者
+### 验证签发者身份
 
 通过用户ID和签发者地址，验证用户ID的签发者身份。
 
@@ -98,7 +97,7 @@
 
 - 业务分类：Verifiable Credential Issuer Verification Service
 
-- 参考资料：https://terminal3.readme.io
+- 参考资料：Terminal3 Identity [Create User](https://terminal3.readme.io/reference/create-user-from-client)方法。
 
 - Oracle Request Data：
 
@@ -126,8 +125,7 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference
-  （getPassport）
+- 参考资料：Passport XYZ [getPassport](https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference)方法。
 
 - Oracle Request Data：
 
@@ -158,8 +156,7 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.ens.domains/learn/deployments
-  （owner）
+- 参考资料：ENS [owner](https://docs.ens.domains/learn/deployments)方法。
 
 - Oracle Request Data：
 
@@ -188,8 +185,7 @@
 
 - 业务分类：Encrypted PII Verification Service 
 
-- 参考资料：https://docs.privado.id/docs/smart-contracts
-  （isProofVerified）
+- 参考资料：Privado ID [isProofVerified](https://docs.privado.id/docs/smart-contracts)方法。
 
 - Oracle Request Data：
 
@@ -218,8 +214,7 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.hashkey.id/protocol/deployments
-  （addrClaimed）
+- 参考资料：HashKey DID [addrClaimed](https://docs.hashkey.id/protocol/deployments)方法。
 
 - Oracle Request Data：
 
@@ -245,8 +240,7 @@
 
 - 业务分类：DID Document Retrieval Service
 
-- 参考资料：https://docs.hashkey.id/developers/api-reference/openapi
-  （Get DID info）
+- 参考资料：HashKey DID [Get DID info](https://docs.hashkey.id/developers/api-reference/openapi)方法。
 
 - Oracle Request Data：
 
@@ -275,8 +269,7 @@
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator
-  （validate）
+- 参考资料：Farcaster ID [validate](https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator)方法。
 
 - Oracle Request Data：
 
@@ -305,8 +298,7 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 - 业务分类：identity Registration Service
 
-- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/id-gateway
-  （registerFor）
+- 参考资料：Farcaster ID [registerFor](https://docs.farcaster.xyz/reference/contracts/reference/id-gateway)方法。
 
 - Oracle Request Data：
 
@@ -337,8 +329,7 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 - 业务分类：Account Holder Authentication Service 
 
-- 参考资料：https://docs.world.org/world-id/reference/contracts
-  （verifyProof）
+- 参考资料：World ID [verifyProof](https://docs.world.org/world-id/reference/contracts)方法。
 
 - Oracle Request Data：
 
@@ -364,14 +355,14 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 ### 查验DID
 
-使用China RealDID的公钥`04b902bb6343a1be2198ffc31749b139117a568d6003217ecdf8fece937713c837b123eecb26f7d9e5649c379d2fbdb3e29f3e50544b1ead2fc802ed38aa78d060`(私钥持有人：中盾安信（厦门）)对用户的`姓名`+`身份证号码`使用sm2p256v1算法进行加密，并使用sm3算法对`姓名`+`身份证号码`进行哈希，查验该用户是否申领过实名DID。请求时也可传入实名DID文档内的公钥索引，如果该用户申领过实名DID则同时返回该索引对应的公钥值。
+使用China RealDID的公钥对用户`姓名`+`身份证号码`使用sm2p256v1算法进行加密，并使用sm3算法对`姓名`+`身份证号码`进行哈希，查验该用户是否申领过实名DID。请求时也可传入实名DID文档内的公钥索引，如果该用户申领过实名DID则同时返回该索引对应的公钥值。
 
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Real-name Authentication Service 
 
-- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档内的`验证DID`接口。
+- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档`验证DID`接口。
 
 - Oracle Request Data：
 
@@ -407,7 +398,7 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 - 业务分类：DID Document Retrieval Service
 
-- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档内的`查询下载DID文档`接口。
+- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档`查询下载DID文档`接口。
 
 - Oracle Request Data：
 
