@@ -13,7 +13,31 @@
 - {"domain": "","signData": ""}
 - {"did": ""}
 
+## Table of Contents
 
+- [JobID汇总](#installation)
+- [参数说明](#deployment)
+    - [Terminal3 Identity](#Terminal3-Identity)
+      - [获取用户个人资料](#获取用户个人资料)
+      - [获取用户钱包地址](#获取用户钱包地址)
+      - [获取用户DID签发者](#获取用户DID签发者)
+    - [Passport XYZ](#Passport-XYZ)
+      - [验证passport持有者](#验证passport持有者)
+    - [ENS](#ENS)
+      - [待补充](#待补充)
+    - [Privado ID](#Privado-ID)
+      - [查询验证结果](#查询验证结果)      
+    - [HashKey DID](#HashKey-DID)
+      - [验证HashKey DID持有者](#验证HashKey-DID持有者)
+      - [查询DID文档](#查询DID文档)
+    - [Farcaster ID](#Farcaster-ID)
+      - [验证签名密钥请求](#验证签名密钥请求)
+      - [注册ID](#注册ID)
+    - [World ID](#World-ID)
+      - [验证World ID证明](#验证World-ID证明)
+    - [China RealDID](#China-RealDID)
+      - [查验DID](#查验DID)
+      - [查询DID文档](#查询DID文档)
 
 ## JobID汇总
 
