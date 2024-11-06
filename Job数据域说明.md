@@ -16,7 +16,6 @@
 - [JobID汇总](#installation)
 - [参数说明](#deployment)
     - [Terminal3 Identity](#Terminal3-Identity)
-      - [获取用户个人资料](#获取用户个人资料)
       - [获取用户钱包地址](#获取用户钱包地址)
       - [获取用户DID签发者](#获取用户DID签发者)
     - [Passport XYZ](#Passport-XYZ)
@@ -41,17 +40,15 @@
 
 以下表格是目前OpenDID Oracle可支持的所有JobID的汇总：
 
-|              JobID                   |         业务分类                                                               |      ID System Name    |   接入方式  |
+|              JobID                   |         业务分类                                    |      ID System Name    |   接入方式  |
 | ------------------------------------ | ---------------------------------------------------|----------------------- | ---------- |
-| `9330d9fc54ab48ada8373493b0ef9cf3`   | Real-name Authentication Service                   | `Terminal3 Identity`   |    API     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Account Holder Authentication Service              | `Terminal3 Identity`   |    API     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Verifiable Credential Issuer Verification Service  | `Terminal3 Identity`   |    合约     |
-| `9330d9fc54ab48ada8373493b0ef9cf3`   | identity Registration Service                      | `Terminal3 Identity`   |    API     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Account Holder Authentication Service              | `Passport XYZ`         |    合约     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Account Holder Authentication Service              | `ENS`                  |    合约     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Encrypted PII Verification Service                 | `Privado ID`           |    合约     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Account Holder Authentication Service              | `HashKey DID`          |    合约     |
-| `9330d9fc54ab48ada8373493b0ef9cf3`   | DID Document Retrieval Service                     | `HashKey DID`          |    合约     |
+| `9330d9fc54ab48ada8373493b0ef9cf3`   | DID Document Retrieval Service                     | `HashKey DID`          |    API     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Account Holder Authentication Service              | `Farcaster ID`         |    合约     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | identity Registration Service                      | `Farcaster ID`         |    合约     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Account Holder Authentication Service              | `World ID`             |    合约     |
@@ -64,165 +61,114 @@
 
 ## Terminal3 Identity
 
-### 获取用户个人资料
 
-用于获取加密的用户资料数据，需要用户私钥进行解密。
+### 验证用户钱包地址
 
-
-- JobID：9330d9fc54ab48ada8373493b0ef9cf3
-
-- 业务分类：Real-name Authentication Service 
-
-- 接口/合约地址：（待补充）
-
-- 方法名称：（待补充）
-
-- Oracle Request Data：
-
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `version`                    | string           |       Y         |    用户签名生成的版本          |
-| `nonce`                     | string            |       Y         |   用户签名生成的nonce        |
-| `ephem_public_key`    | string            |       Y        |    用户签名生成的ephem公钥 |
-| `ciphertext`                | string            |       Y        |    用户签名生成的密文            |
-
-- Oracle Response Data：
-
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `data`                    | object           |       Y         |    数据          |
-
-- data：
-
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `encrypted_profile`                    | object           |       Y         |    加密的用户资料数据          |
-
-- encrypted_profile：
-
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `version`                    | string           |       Y         |    用户签名生成的版本          |
-| `nonce`                     | string            |       Y         |   用户签名生成的nonce        |
-| `ephem_public_key`    | string            |       Y        |    用户签名生成的ephem公钥 |
-| `ciphertext`                | string            |       Y        |    用户签名生成的密文            |
-
-
-### 获取用户钱包地址
-
-用于获取用户所有钱包地址。
+通过userId、walletAddress以及钱包地址的私钥对walletAddress进行Secp256k1算法的签名，验证该用户的确是userId的Holder。
 
 
 - JobID：a795b5cb935f49b68b47687e0071751e
 
 - 业务分类：Account Holder Authentication Service
 
-- 接口/合约地址：https://staging.terminal3.io/v1/user/{user_id}/
-
-- 方法名称：wallet_addresses
+- 参考资料：https://terminal3.readme.io/reference/get-user-wallet-addresses（Get Wallet Addresses）
 
 - Oracle Request Data：
 
 |           名称                |       类型      |      必传      |                     描述               |
 | ------------------| ----------|----------| ----------------------|
-| `user_id`                    | int32           |       Y         |    用户ID          |
-
+| `userId`                    | int32           |       Y         |    用户ID          |
+| `walletAddress`                    | string           |       Y         |    用户钱包地址         |
+| `signature`                    | string           |       Y         |    用户钱包地址的私钥对WalletAddress的签名值        |
 
 - Oracle Response Data：
 
 |           名称                |       类型      |      必传      |                     描述               |
 | ------------------| ----------|----------| ----------------------|
-|                    | json           |       Y         |    数据          |
+|          result          | boolean           |       Y         |    验证结果          |
 
 
-### 获取用户DID签发者
+### 验证用户DID签发者
 
-用于获取用户所有钱包地址。
+通过用户ID和签发者地址，验证用户ID的签发者身份。
 
 
 - JobID：a795b5cb935f49b68b47687e0071751e
 
 - 业务分类：Verifiable Credential Issuer Verification Service
 
-- 接口/合约地址：Ethereum/0xdcD6e6169aB842A9f9740E12d1DBAf87F2B16777(T3DIDRegistry)
-
-- 方法名称：issuers
+- 参考资料：https://terminal3.readme.io
 
 - Oracle Request Data：
 
 |           名称                |       类型      |      必传      |                     描述               |
 | ------------------| ----------|----------| ----------------------|
 | `did`                    | string           |       Y         |    用户ID          |
+| `issuerAddress`                    | address           |       Y         |    要验证的签发者地址         |
 
 
 - Oracle Response Data：
 
 |           名称                |       类型      |      必传      |                     描述               |
 | ------------------| ----------|----------| ----------------------|
-|          `issuerAddress`           | address           |       Y         |   签发者地址          |
-|          `string`           | string           |       Y         |   签发者名称（ENS域名）       |
-
+|          result          | boolean           |       Y         |    验证结果          |
 
 
 
 ## Passport XYZ
 
-### 验证passport持有者
+### 验证持有者
 
-验证签名、并根据账户地址查询该账户是否持有passport
+通过用户的链账户地址，以及对应的私钥对链账户地址采用Secp256k1算法进行签名，验证该账户是否持有passport。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Account Holder Authentication Service 
 
-- 接口/合约地址：Arbitrum/0x2050256A91cbABD7C42465aA0d5325115C1dEB43(GitcoinPassportDecoder)
-
-- 方法名称：getPassport
+- 参考资料：https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference（getPassport）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `signature`                    | string           |       Y         |    对address的签名数据          |
-| `address`                     | address            |       Y         |   签名原文（签名数据私钥钱包地址）        |
+|       名称     |     类型    |      必传  |         描述                            |
+| ---------|- -------|--------|------------------------|
+| `address `   | string      |       Y     |   用户链账户地址                  |
+| `signature`  | string      |       Y     |   用户私钥对address的签名值   |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    验证的结果          |
+|       名称     |     类型    |      必传  |         描述              |
+| --------------|-------------|-----------|--------------------------|
+| `result`      | bool        |       Y   |    验证的结果              |
 
 
 
 
 ## ENS
 
-### 待补充
+### 
 
-待补充。
+通过domain以及使用私钥对domain内容进行Secp256k1算法的签名，验证该用户的确是domain的Holder。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Account Holder Authentication Service 
 
-- 接口/合约地址：待补充
-
-- 方法名称：待补充
+- 参考资料：https://docs.ens.domains/learn/deployments（owner）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `signature`                    | string           |       Y         |    使用私钥将域名签名后的数据          |
-| `domain`                     | string            |       Y         |   需要验证的域名        |
+|       名称     |     类型    |      必传  |         描述              |
+| --------------|-------------|-----------|--------------------------|
+| `domain`      | string      |       Y   |   域名                          |
+| `signature`   | string      |       Y   |   用户私钥对domain的签名值   |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    验证的结果          |
+|       名称     |     类型    |      必传  |         描述              |
+| --------------|-------------|-----------|--------------------------|
+| `result`      | bool        |       Y   |    验证的结果              |
 
 
 
@@ -231,111 +177,106 @@
 
 ### 查询验证结果
 
-查询用户提交的ZK Proof是否验证通过。
+对于已经知道`requestId`和`sender` 值的验证方，可以查验该用户是否已经做过了持有某个VC的验证。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Encrypted PII Verification Service 
 
-- 接口/合约地址：Polygon/0x394d1dad46907bd54d15926A1ab4535EF2BF47b1(UniversalVerifier)
-
-- 方法名称：isProofVerified
+- 参考资料：https://docs.privado.id/docs/smart-contracts（isProofVerified）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `sender`                    | address           |       Y         |    待查询用户的钱包地址          |
-| `requestId`                     | uint64            |       Y         |   验证方设置的验证请求ID        |
+|       名称          |     类型    |      必传  |         描述                                |
+| ------------|--------|--------|--------------------------|
+| `requestId `      | uint64     |       Y     |            请求ID                          |
+| `sender `         | address   |       Y     |              待查询用户的钱包地址   |
+
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    验证的结果          |
+|       名称     |     类型    |      必传  |         描述              |
+| --------------|-------------|-----------|--------------------------|
+| `result`      | bool        |       Y   |    验证的结果              |
 
 
 
 ## HashKey DID
 
-### 验证HashKey DID持有者
+### 验证持有者
 
-根据钱包地址和签名值验证用户是否是HashKey DID持有者。
+通过用户的钱包地址，以及钱包地址对应的私钥对钱包地址采用Secp256k1算法进行签名，验证该账户是否持有HashKey DID。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Account Holder Authentication Service 
 
-- 接口/合约地址：PlatON/0x7fDd3f96cBDE51737A9E24b461E7E92A057C3BBf(Did)
-
-- 方法名称：addrClaimed
+- 参考资料：https://docs.hashkey.id/protocol/deployments（addrClaimed）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `signature`                    | string           |       Y         |    使用钱包私钥对account参数的签名值          |
-| `account`                     | address            |       Y         |   钱包地址       |
+|       名称    |     类型    |      必传      |         描述           |
+| -------------|-------------|-------------|------------------------|
+| `account `   | address     |       Y     |   钱包地址              |
+| `signature`  | string      |       Y     |   使用钱包私钥对account参数的签名值   |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    验证的结果          |
+|       名称     |     类型    |      必传  |         描述              |
+| --------------|-------------|-----------|--------------------------|
+| `result`      | bool        |       Y   |    验证的结果              |
 
 
 
-### 查询DID文档
+### 查询DID
 
-根据HashKey DID标识符查询DID文档。
+根据用户的HashKey DID标识符查询相关数据。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：DID Document Retrieval Service
 
-- 接口/合约地址：https://api.hashkey.id/did/api/did/{did}
-
-- 方法名称：N/A
+- 参考资料：https://docs.hashkey.id/developers/api-reference/openapi（Get DID info）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `did`                    | string           |       Y         |    DID标识符         |
+|     名称     |     类型  |      必传 |      描述            |
+| ------------| ----------|----------| --------------------|
+| `did`       | string    |       Y  |    DID标识符         |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
-| ------------------| ----------|----------| ----------------------|
-| `result`                    | string           |       Y         |    DID文档          |
+|    名称    |       类型   |      必传      |    描述       |
+|-----------|--------------|---------------|--------------|
+| `result`  | string       |       Y       |    关联数据    |
 
 
 
 
 ## Farcaster ID
 
-### 验证签名密钥请求
+### 验证持有者
 
 来验证您的应用创建的签名密钥请求。
+通过 fid、公钥、以及使用私钥进行EIP-712签名的值，验证该账户是否持有Farcaster ID。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Account Holder Authentication Service 
 
-- 接口/合约地址：Optimism/0x00000000fc700472606ed4fa22623acf62c60553(SignedKeyRequestValidator)
-
-- 方法名称：validate
+- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator（validate）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           名称                |       类型      |      必传      |            描述             |
 | ------------------| ----------|----------| ----------------------|
-| `fid`                    | uint256           |       Y         |    与公钥关联的主fid         |
-| `key`                     | bytes            |       Y         |   要验证的公钥       |
-| `sig`                     | bytes            |       Y         |   请求密钥的实体的EIP-712签名      |
+| `fid`                    | uint256           |       Y         |    与公钥关联的主fid          |
+| `key`                     | bytes            |       Y         |   要验证的公钥               |
+| `sig`                     | bytes            |       Y         |   EIP-712实体的签名值              |
+
 
 - Oracle Response Data：
 
@@ -347,15 +288,15 @@
 
 ### 注册ID
 
-将新的 fid 注册到特定地址并支付存储费用。接收地址必须签署 EIP-712 注册消息以批准注册。接收者必须尚未拥有 fid。注册一个新的FID，调用者必须尚未拥有 fid。
+还未拥有 fid 的用户可以注册一个新的 FID。
+
+note：将新的 fid 注册到特定地址并支付存储费用。接收地址必须签署 EIP-712 注册消息以批准注册。接收者必须尚未拥有 fid。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：identity Registration Service
 
-- 接口/合约地址：Optimism\0x00000000fc25870c6ed6b6c7e41fb078b7656f69(IdGateway)
-
-- 方法名称：registerFor
+- 参考资料：https://docs.farcaster.xyz/reference/contracts/reference/id-gateway（registerFor）
 
 - Oracle Request Data：
 
@@ -378,28 +319,26 @@
 
 ## World ID
 
-### 验证World ID证明
+### 验证World ID
 
-待补充。
+通过World ID根以及证明数据，验证World ID是否为实际本人。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Account Holder Authentication Service 
 
-- 接口/合约地址：Ethereum/0x163b09b4fe21177c455d850bd815b6d583732432 (WorldIDRouter)
-
-- 方法名称：verifyProof
+- 参考资料：https://docs.world.org/world-id/reference/contracts（verifyProof）
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           名称     |       类型      |      必传      |                     描述               |
 | ------------------| ----------|----------| ----------------------|
 | `root`                    | uint256           |       Y         |    要验证的World ID根       |
-| `groupId`                     | uint256            |       Y         |   要验证的凭证类型。由于链上仅支持 Orb 凭证（虹膜），因此该值必须为 1。      |
-| `signalHash`                     | uint256            |       Y         |   要验证的信号的 keccak256 哈希值。      |
-| `nullifierHash`                    | uint256           |       Y         |    此操作的匿名用户 ID。此 ID 是从 IDKit 小部件获取的，应按原样传递。       |
-| `externalNullifierHash`                     | uint256            |       Y         |   用于标识用户正在验证哪个应用程序和操作       |
-| `proof`                     | uint256[8]            |       Y         |   要验证的零知识证明。这是从 IDKit 小部件获取的十六进制字符串证明。     |
+| `groupId`                     | uint256            |       Y         |   要验证的凭证类型。目前仅支持填 1      |
+| `signalHash`                     | uint256            |       Y         |   要验证的信号的 keccak256 哈希值      |
+| `nullifierHash`                    | uint256           |       Y         |    当前操作的匿名用户ID      |
+| `externalNullifierHash`                     | uint256            |       Y         |   标识用户正在验证的应用程序和操作的 keccak256 哈希值       |
+| `proof`                     | uint256[8]            |       Y         |   从 IDKit 获取的十六进制字符串证明要验证的零知识证明    |
 
 - Oracle Response Data：
 
@@ -414,16 +353,14 @@
 
 ### 查验DID
 
-使用China RealDID根据用户的实名信息查验对应的DID。
+使用China RealDID的公钥`04b902bb6343a1be2198ffc31749b139117a568d6003217ecdf8fece937713c837b123eecb26f7d9e5649c379d2fbdb3e29f3e50544b1ead2fc802ed38aa78d060`(私钥持有人：中盾安信（厦门）)对用户的`姓名`+`身份证号码`使用sm2p256v1算法进行加密，并使用sm3算法对`姓名`+`身份证号码`进行哈希，查验该用户是否申领过实名DID。请求时也可传入实名DID文档内的公钥索引，如果该用户申领过实名DID则同时返回该索引对应的公钥值。
 
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：Real-name Authentication Service 
 
-- 接口/合约地址：https://openapi-ctid.bsnbase.com/
-
-- 方法名称：rais/credential/userinfo/verify
+- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档内的`验证DID`接口。
 
 - Oracle Request Data：
 
@@ -432,7 +369,7 @@
 | `authApplyRetainData`                    | string           |       Y         |    个人用户信息加密字段          |
 | `publicKeyIndex`                     | Integer            |       N         |   实名DID文档中的公钥索引       |
 | `authHash`    | string            |       Y        |    使用SM3算法对姓名+身份证号进行哈希计算后的哈希值 |
-| `ciphertext`                | string            |       Y        |    用户签名生成的密文            |
+
 
 - authApplyRetainData说明：
 
@@ -453,15 +390,13 @@
 
 ### 查询DID文档
 
-根据实名DID标识符查询DID文档。
+使用实名DID标识符查询对应的DID文档以及状态。
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
 - 业务分类：DID Document Retrieval Service
 
-- 接口/合约地址：https://openapi-ctid.bsnbase.com/
-
-- 方法名称：rais/did/getDocument
+- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档内的`查询下载DID文档`接口。
 
 - Oracle Request Data：
 
@@ -475,7 +410,7 @@
 |           名称                |       类型      |      必传      |                     描述               |
 | ------------------| ----------|----------| ----------------------|
 | `didDocument`                    | string           |       Y         |    DID文档          |
-| `status`                    | string           |       Y         |    DID状态。0：正常，1：注销        |
+| `status`                    | string           |       Y         |    0：正常，1：注销        |
 
 
 ## Legal
