@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/@govtechsg/token-registry" alt="NPM"><img src="https://img.shields.io/npm/dw/@govtechsg/token-registry" /></a>
   <img src="https://img.shields.io/github/license/open-attestation/token-registry" />
 
-**对应用合约调用OpenDID Oracle合约的请求和应答`data`数据域的数据结构说明。** `data`整体是一个`string`类型的值，该值是符合[RFC 8259](https://dl.acm.org/doi/10.17487/RFC8259)标准的一个JSON结构。以下是两个完整的`data`数据域的示例。
+**应用合约调用OpenDID Oracle合约的请求和应答`data`数据域的数据结构说明。** `data`整体是一个`string`类型的值，该值是符合[RFC 8259](https://dl.acm.org/doi/10.17487/RFC8259)标准的一个JSON结构。以下是两个完整的`data`数据域的示例。
 
 - {"website": "www.opendid.io","email": "contact@opendid.io"}
 - {"result": "true"}
@@ -61,12 +61,10 @@
 
 > **Note:** 接入方式为 API 表示 OpenDID Oracle 通过 ID System 提供的相应 API 进行的验证，合约表示 OpenDID Oracle 通过调用 ID System 提供的智能合约相关方法进行的验证。
 
-## 参数说明
 
+## Terminal3 Identity
 
-### Terminal3 Identity
-
-#### 获取用户个人资料
+### 获取用户个人资料
 
 用于获取加密的用户资料数据，需要用户私钥进行解密。
 
@@ -110,7 +108,7 @@
 | `ciphertext`                | string            |       Y        |    用户签名生成的密文            |
 
 
-#### 获取用户钱包地址
+### 获取用户钱包地址
 
 用于获取用户所有钱包地址。
 
@@ -137,7 +135,7 @@
 |                    | json           |       Y         |    数据          |
 
 
-#### 获取用户DID签发者
+### 获取用户DID签发者
 
 用于获取用户所有钱包地址。
 
@@ -167,9 +165,9 @@
 
 
 
-### Passport XYZ
+## Passport XYZ
 
-#### 验证passport持有者
+### 验证passport持有者
 
 验证签名、并根据账户地址查询该账户是否持有passport
 
@@ -198,9 +196,9 @@
 
 
 
-### ENS
+## ENS
 
-#### 待补充
+### 待补充
 
 待补充。
 
@@ -229,9 +227,9 @@
 
 
 
-### Privado ID
+## Privado ID
 
-#### 查询验证结果
+### 查询验证结果
 
 查询用户提交的ZK Proof是否验证通过。
 
@@ -259,9 +257,9 @@
 
 
 
-### HashKey DID
+## HashKey DID
 
-#### 验证HashKey DID持有者
+### 验证HashKey DID持有者
 
 根据钱包地址和签名值验证用户是否是HashKey DID持有者。
 
@@ -289,7 +287,7 @@
 
 
 
-#### 查询DID文档
+### 查询DID文档
 
 根据HashKey DID标识符查询DID文档。
 
@@ -317,9 +315,9 @@
 
 
 
-### Farcaster ID
+## Farcaster ID
 
-#### 验证签名密钥请求
+### 验证签名密钥请求
 
 来验证您的应用创建的签名密钥请求。
 
@@ -347,7 +345,7 @@
 
 
 
-#### 注册ID
+### 注册ID
 
 将新的 fid 注册到特定地址并支付存储费用。接收地址必须签署 EIP-712 注册消息以批准注册。接收者必须尚未拥有 fid。注册一个新的FID，调用者必须尚未拥有 fid。
 
@@ -378,9 +376,9 @@
 
 
 
-### World ID
+## World ID
 
-#### 验证World ID证明
+### 验证World ID证明
 
 待补充。
 
@@ -412,9 +410,9 @@
 
 
 
-### China RealDID
+## China RealDID
 
-#### 查验DID
+### 查验DID
 
 根据用户实名信息查验对应的DID。
 
@@ -453,7 +451,7 @@
 
 
 
-#### 查询DID文档
+### 查询DID文档
 
 根据实名DID标识符查询DID文档。
 
