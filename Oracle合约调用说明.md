@@ -18,6 +18,25 @@
 > [!IMPORTANT]
 > OpenDID Oracle定义的费用，使用Oracle合约所在链的加密货币进行支付。Ethereum和Polygon上的OpenDID Oracle合约，支持应用合约主动取消某笔还未得到验证结果的请求，取消后OpenDID Oracle会即时返还收取到的所有费用。Aptos上的OpenDID Oracle合约，暂不支持此操作。
 
+
+## Table of Contents
+
+- [调用OpenDID Oracle合约](#调用OpenDID-Oracle合约)
+- [Ethereum和Polygon](#Ethereum和Polygon)
+    - [查询费用](#查询费用)
+    - [发送验证数据](#发送验证数据)
+    - [接收验证结果](#接收验证结果)
+    - [取消验证请求](#取消验证请求)
+- [Aptos](#Aptos)
+    - [注册 UA](#注册UA)
+    - [查询费用](#查询费用)
+    - [发送验证数据](#发送验证数据)
+    - [接收验证结果](#接收验证结果)      
+- [Legal](#Legal)
+- [Community](#Community)
+
+
+
 ## 调用OpenDID Oracle合约
 
 ### Ethereum和Polygon
