@@ -40,10 +40,10 @@
 
 ## Ethereum和Polygon
 
-![image](OpenDID Oracle-EVM.png)
+![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle-EVM.png)
 
 ### 查询费用
-应用合约调用 OpenDID Oracle 合约的 quote 方法获取需要支付的业务费，您需在`发送验证数据`时支付这笔业务费。
+应用合约调用 OpenDID Oracle 合约的`quote`方法获取需要支付的业务费，您需在"发送验证数据"时支付这笔业务费。
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -57,7 +57,7 @@ function quote(bytes32 jobId) external view returns (uint256);
 
 ### 发送验证数据
 
-应用合约调用 OpenDID Oracle 合约的 oracleRequest 方法发送待验证的数据。OpenDID Oracle合约在收到您的请求后，会进行相应的验证并生成唯一的 requestId。
+应用合约调用 OpenDID Oracle 合约的`oracleRequest`方法发送待验证的数据。OpenDID Oracle合约在收到您的请求后，会进行相应的验证并生成唯一的`requestId`。
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -72,7 +72,7 @@ function oracleRequest(
 
 ### 接收验证结果
 
-应用合约里面需实现 OpenDID Oracle 合约接口定义的 oracleResponse 方法，以便 OpenDID Oracle 合约可以将 requestId 对应的验证结果回送给应用合约。
+应用合约里面需实现 OpenDID Oracle 合约接口定义的`oracleResponse`方法，以便 OpenDID Oracle 合约可以将`requestId`对应的验证结果回送给应用合约。
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -82,7 +82,7 @@ function oracleResponse(bytes32 requestId, string memory data) external;
 
 ### 取消验证请求
 
-_ 应用合约可以通过调用 OpenDID Oracle 合约的 cancelOracleRequest 方法取消验证。取消后我们会向`refundAddress`即时返还已收取的业务费。_
+应用合约可以通过调用 OpenDID Oracle 合约的`cancelOracleRequest`方法取消验证。取消后我们会向`refundAddress`即时返还已收取的业务费。
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -180,7 +180,7 @@ contract ATestConsumer is Ownable {
 ## Aptos
 
 ### 注册 UA
-UA 指应用合约内的任意 struct，但每个应用合约只能注册一个 UA。应用合约内可以通过以下方法注册 UA，并且保存返回的 UaCapability<UA>， 这将在后续的调用中使用。
+UA 指应用合约内的任意 struct，但每个应用合约只能注册一个 UA。应用合约内可以通过以下方法注册 UA，并且保存返回的`UaCapability<UA>`， 这将在后续的调用中使用。
 
 ```move
 public fun register_ua<UA>(account: &signer): UaCapability<UA>;
@@ -191,7 +191,7 @@ public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 
 
 ### 查询费用
-应用合约调用 OpenDID Oracle 合约的 get_messaging_fees 方法获取需要支付的费用。
+应用合约调用 OpenDID Oracle 合约的`get_messaging_fees`方法获取需要支付的业务费，您需在"发送验证数据"时支付这笔业务费。
 
 ```move
 public fun get_messaging_fees(job_id: vector<u8>): u64
@@ -204,7 +204,7 @@ public fun get_messaging_fees(job_id: vector<u8>): u64
 
 ### 发送验证数据
 
-应用合约调用 OpenDID Oracle 合约的 oracle_request<UA> 方法发送待验证的数据。
+应用合约调用 OpenDID Oracle 合约的`oracle_request<UA>`方法发送待验证的数据。
 
 ```move
 public fun oracle_request<UA>(
@@ -220,7 +220,7 @@ public fun oracle_request<UA>(
 ```
 
 > [!WARNING]
-> 必须填写接收验证结果的应用合约地址 callback_address 和模块名称 callback_module，并且指定不小于“查询费用”的 fee。
+> 必须填写接收验证结果的应用合约地址`callback_address`和模块名称`callback_module`，并且指定不小于“查询费用”的`fee`。
 
 
 ### 接收验证结果
@@ -232,7 +232,7 @@ public entry fun set_oracle_response(request_id: vector<u8>, data: String)
 
 ```
 
-应用合约收到验证结果后，必须调用 OpenDID Oracle 合约的 receive_response<UA> 方法进行验证。
+应用合约收到验证结果后，必须调用 OpenDID Oracle 合约的`receive_response<UA>`方法进行验证。
 
 ```move
 public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaCapability<UA>)
