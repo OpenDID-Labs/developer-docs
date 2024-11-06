@@ -414,7 +414,7 @@
 
 ### 查验DID
 
-根据用户实名信息查验对应的DID。
+使用China RealDID根据用户的实名信息查验对应的DID。
 
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
