@@ -38,7 +38,7 @@
 
 ## Ethereum and Polygon
 
-![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle-EVM.png)
+![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Contract-EVM.png)
 
 ### Query Fees
 Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
