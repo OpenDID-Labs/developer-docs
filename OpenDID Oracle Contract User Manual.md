@@ -16,7 +16,7 @@
 * Aptos Mainnet：`                              `
 
 
-:building_construction: **OpenDID Oracle合约内定义的接收应用合约数据的参数是`string`类型的`data`,想要了解'data'的数据结构?** 请查看OpenDID Oracle的[job数据域说明](https://github.com/OpenDID-Labs) — 包含众多ID System不同job的请求和应答参数的结构说明。
+:building_construction: **OpenDID Oracle合约内定义的接收应用合约数据的参数是`string`类型的`data`,想要了解'data'的数据结构?** 请查看[OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md) — 包含众多ID System不同job的请求和应答参数的结构说明。
 
 > [!IMPORTANT]
 > 在OpenDID Oracle的体系内我们会将验证结果回送给您的应用合约，这一动作会涉及到 GAS 消耗，所以在OpenDID Oracle合约内我们定义了业务费，您可通过jobId查询业务费后发送验证数据。如果您在长达15分钟后还未得到验证结果，便可主动取消验证，我们会即时返还已收取的业务费。
@@ -29,13 +29,13 @@
     - [发送验证数据](#发送验证数据)
     - [接收验证结果](#接收验证结果)
     - [取消验证请求](#取消验证请求)
-- [Aptos](#Aptos)
+- [Aptos](#aptos)
     - [注册 UA](#注册UA)
     - [查询费用](#查询费用)
     - [发送验证数据](#发送验证数据)
     - [接收验证结果](#接收验证结果)      
-- [Legal](#Legal)
-- [Community](#Community)
+- [Legal](#legal)
+- [Community](#community)
 
 
 ## Ethereum和Polygon
@@ -52,7 +52,7 @@ function quote(bytes32 jobId) external view returns (uint256);
 ```
 
 > [!WARNING]
-> jobId 可通过OpenDID Oracle的[job数据域说明](https://github.com/OpenDID-Labs)查看，不同的jobID对应的费用也不相同。
+> jobId 可通过[OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md)查看，不同的jobID对应的费用也不相同。
 
 
 ### 发送验证数据
@@ -199,7 +199,7 @@ public fun get_messaging_fees(job_id: vector<u8>): u64
 ```
 
 > [!WARNING]
-> job_id 可通过OpenDID Oracle的[job数据域说明](https://github.com/OpenDID-Labs)，不同的job_id对应的费用也不相同。
+> job_id 可通过[OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md)查看，不同的job_id对应的费用也不相同。
 
 
 ### 发送验证数据
