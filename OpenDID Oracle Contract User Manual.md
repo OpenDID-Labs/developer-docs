@@ -1,4 +1,3 @@
-# <img src="logo.svg" alt="OpenDID" height="40px">
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://opendid.io)
 [![license](https://img.shields.io/badge/license-MIT-red.svg)](https://mit-license.org/)
