@@ -6,11 +6,11 @@
 
 **Application system developers can call the OpenDID Oracle contract through their application contracts. In this way, they can access the OpenDID service in the form of a web3-based oracle.** So far, we have deployed the OpenDID Oracle contract on three public chains: Ethereum Mainnet, Polygon Mainnet and Aptos Mainnet. Since the data on each blockchain is independent, we recommend that you choose one of the chains to deploy application contracts based on business needs. Below are the addresses of the OpenDID Oracle contract on different chains.
 
-* Ethereum Mainnet：`                              `
+* Ethereum Mainnet: `                              `
 
-* Polygon Mainnet：`                              `
+* Polygon Mainnet: `                              `
 
-* Aptos Mainnet：`                              `
+* Aptos Mainnet: `                              `
 
 
 :building_construction: **In the OpenDID Oracle contract, the parameter defined for application contracts to receive data is `data`, which is of type `string`.** To learn more about the data structure, please refer to [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). This document contains data structures for request and response parameters for various ID System jobs.
@@ -36,8 +36,6 @@
 
 
 ## Ethereum and Polygon
-
-![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Contract-EVM.png)
 
 ### Query Fees
 Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
