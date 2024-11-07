@@ -255,11 +255,13 @@ public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaC
 module app_example::app {
     use std::option;
     use std::option::Option;
+    use std::signer;
     use did_oracle::oracle::{Self,UaCapability};
     use std::string::{Self, String};
     use aptos_std::simple_map;
     use aptos_framework::aptos_coin::AptosCoin;
     use aptos_framework::coin;
+    use aptos_framework::transaction_context;
 
     struct OracleUA {}
 
@@ -308,9 +310,11 @@ module app_example::app {
     public entry fun call_oracle(account:&signer,job_id:vector<u8>,data: String) acquires AppMetaData {
         let module_id = string::utf8(b"app");
 
-        let job_fee_amount = oracle::get_messaging_fees(job_id);
+        let job_fee_amount = oracle::quote(job_id);
 
         job_fee_amount = job_fee_amount + (job_fee_amount/10)*2;
+
+        job_fee_amount = job_fee_amount*transaction_context::gas_unit_price();
 
         let job_fee = coin::withdraw<AptosCoin>(account,job_fee_amount);
 
@@ -330,16 +334,22 @@ module app_example::app {
         metadata.nonce = metadata.nonce + 1;
     }
 
-    public entry fun set_oracle_response(request_id: vector<u8>, data: String) acquires AppMetaData {
+    public entry fun oracle_response(request_id: vector<u8>) acquires AppMetaData {
         let metadata = borrow_global_mut<AppMetaData>(@app_example);
 
-        oracle::receive_response<OracleUA>(request_id, data,&metadata.cap);
+        let data = oracle::receive_response<OracleUA>(request_id,&metadata.cap);
 
         if (simple_map::contains_key(&metadata.oracle_call, &request_id)) {
             let call_data = simple_map::borrow_mut(&mut metadata.oracle_call, &request_id);
             call_data.call_back = true;
             call_data.response_data = option::some(data);
         }
+    }
+
+    public entry fun cancel_oracle_request(account:&signer,request_id: vector<u8>) acquires AppMetaData {
+        let metadata = borrow_global<AppMetaData>(@app_example);
+        let refund_fee = oracle::cancel_oracle_request<OracleUA>(request_id,&metadata.cap);
+        coin::deposit(signer::address_of(account),refund_fee);
     }
 
     #[test_only]
