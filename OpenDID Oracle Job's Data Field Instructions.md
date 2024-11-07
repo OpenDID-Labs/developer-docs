@@ -1,5 +1,3 @@
-# <img src="logo.svg" alt="OpenDID" height="40px">
-
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://opendid.io)
 [![license](https://img.shields.io/badge/license-MIT-red.svg)](https://mit-license.org/)
@@ -9,8 +7,8 @@
 
 **This document is an explanation of the data structure of `data` in the request and response of the OpenDID Oracle contract called by the application contract.** The `data` is a value of type `string`. It is a standard JSON structure that conforms to [RFC 8259]( https://dl.acm.org/doi/10.17487/RFC8259). Here are two examples of data fields of `data`.
 
-- {"website": "www.opendid.io","email": "contact@opendid.io"}
-- {"result": "true"}
+- `{"website": "www.opendid.io","email": "contact@opendid.io"}`
+- `{"result": "true"}`
 
 ## Table of Contents
 
@@ -70,9 +68,9 @@ The following table is a summary of all JobIDs currently supported by OpenID Ora
 
 Verify whether the account holds a passport by verifying the signature of the wallet address signed by the corresponding private key with secp256k1 algorithm.
 
-- JobID：5e4dd148f004f6790bd54d5f7fbd0a38
+- JobID：`5e4dd148f004f6790bd54d5f7fbd0a38`
 
-- Service type：Account Holder Authentication Service 
+- Service type：`Account Holder Authentication Service`
 
 - Reference：Passport XYZ [getPassport](https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference) function.
 
@@ -99,9 +97,9 @@ Verify whether the account holds a passport by verifying the signature of the wa
 
 Verify whether the the user is the holder of the domain by verifying the signature of the domain signed by the corresponding private key with secp256k1 algorithm.
 
-- JobID：1028e09602ca4bdd89a6bba67212001f
+- JobID：`1028e09602ca4bdd89a6bba67212001f`
 
-- Service type：Account Holder Authentication Service 
+- Service type：`Account Holder Authentication Service` 
 
 - Reference：ENS [owner](https://docs.ens.domains/learn/deployments) function.
 
@@ -128,9 +126,9 @@ Verify whether the the user is the holder of the domain by verifying the signatu
 
 For validators who already know the values of `requestId` and `sender`, they can verify whether the user has already been verified to hold a certain VC.
 
-- JobID：d1926a6028d746c89e791bf7ac1b028b
+- JobID：`d1926a6028d746c89e791bf7ac1b028b`
 
-- Service type：Encrypted PII Verification Service 
+- Service type：`Encrypted PII Verification Service` 
 
 - Reference：Privado ID [isProofVerified](https://docs.privado.id/docs/smart-contracts) function.
 
@@ -158,9 +156,9 @@ For validators who already know the values of `requestId` and `sender`, they can
 
 Verify whether the account holds HashKey DID by verifying the signature of the wallet address signed by the corresponding private key with secp256k1 algorithm.
 
-- JobID：05b3af7569d74983bd0895ff273ffc6f
+- JobID：`05b3af7569d74983bd0895ff273ffc6f`
 
-- Service type：Account Holder Authentication Service 
+- Service type：`Account Holder Authentication Service`
 
 - Reference：HashKey DID [addrClaimed](https://docs.hashkey.id/protocol/deployments) function.
 
@@ -184,9 +182,9 @@ Verify whether the account holds HashKey DID by verifying the signature of the w
 
 Query relevant data based on the user's HashKey DID identifier.
 
-- JobID：152872f465eb47e09a8047359055e152
+- JobID：`152872f465eb47e09a8047359055e152`
 
-- Service type：DID Document Retrieval Service
+- Service type：`DID Document Retrieval Service`
 
 - Reference：HashKey DID [Get DID info](https://docs.hashkey.id/developers/api-reference/openapi) function.
 
@@ -212,9 +210,9 @@ Query relevant data based on the user's HashKey DID identifier.
 
 Verify whether the account holds a Farcaster ID by using the FID, public key, and EIP-712 signature signed by the private key.
 
-- JobID：e9692ce7e0de4c03b1d816f42f55b44d
+- JobID：`e9692ce7e0de4c03b1d816f42f55b44d`
 
-- Service type：Account Holder Authentication Service 
+- Service type：`Account Holder Authentication Service` 
 
 - Reference：Farcaster ID [validate](https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator) function.
 
@@ -242,9 +240,9 @@ Users who have not yet owned a FID can register a new FID.
 > [!WARNING]
 > You need to register the new FID at a specific address and pay the storage fee. The receiving address must sign the EIP-712 registration message to approve registration. The recipient must not yet possess the FID.
 
-- JobID：8e93566e07fd44ba8ba002f0fe4e7eb8
+- JobID：`8e93566e07fd44ba8ba002f0fe4e7eb8`
 
-- Service type：identity Registration Service
+- Service type：`identity Registration Service`
 
 - Reference：Farcaster ID [registerFor](https://docs.farcaster.xyz/reference/contracts/reference/id-gateway) function.
 
@@ -276,9 +274,9 @@ Users who have not yet owned a FID can register a new FID.
 
 
 
-- JobID：48fee62acfaf46f693edce89860369d5
+- JobID：`48fee62acfaf46f693edce89860369d5`
 
-- Service type：Real-name Authentication Service
+- Service type：`Real-name Authentication Service`
 
 - Reference：Terminal3 Identity
 
@@ -293,9 +291,9 @@ Users who have not yet owned a FID can register a new FID.
 
 By verifying the userId, walletAddress, and the signature of walletAddress signed by the corresponding private key with secp256k1 algorithm to confirm that the user is indeed the holder of that userId.
 
-- JobID：a795b5cb935f49b68b47687e0071751e
+- JobID：`a795b5cb935f49b68b47687e0071751e`
 
-- Service type：Account Holder Authentication Service
+- Service type：`Account Holder Authentication Service`
 
 - Reference：Terminal3 Identity [Get Wallet Addresses](https://terminal3.readme.io/reference/get-user-wallet-addresses) function.
 
@@ -320,9 +318,9 @@ By verifying the userId, walletAddress, and the signature of walletAddress signe
 Verify the issuer's identity of the user ID through the user ID and issuer address.
 
 
-- JobID：509e3db7758f4b61ba35036575f3f3f0
+- JobID：`509e3db7758f4b61ba35036575f3f3f0`
 
-- Service type：Verifiable Credential Issuer Verification Service
+- Service type：`Verifiable Credential Issuer Verification Service`
 
 - Reference：Terminal3 Identity [Create User](https://terminal3.readme.io/reference/create-user-from-client) function.
 
@@ -349,9 +347,9 @@ Verify the issuer's identity of the user ID through the user ID and issuer addre
 
 Verify whether the World ID is the actual person through the World ID root and proof data.
 
-- JobID：910529f3dc394bbcad0b3ddd656d2be5
+- JobID：`910529f3dc394bbcad0b3ddd656d2be5`
 
-- Service type：Account Holder Authentication Service 
+- Service type：`Account Holder Authentication Service` 
 
 - Reference：World ID [verifyProof](https://docs.world.org/world-id/reference/contracts) function.
 
@@ -382,9 +380,9 @@ Verify whether the World ID is the actual person through the World ID root and p
 Use the public key of China RealDID to encrypt the user's `name` + `ID number` using the sm2p256v1 algorithm, and use the sm3 algorithm to hash the string of `name` + `ID number` to check whether the user has applied for a China RealDID. When requesting, you can also pass in the public key index in the DID document. If the user has applied for a RealDID, the corresponding public key value of that index will be returned at the same time.
 
 
-- JobID：9330d9fc54ab48ada8373493b0ef9cf3
+- JobID：`9330d9fc54ab48ada8373493b0ef9cf3`
 
-- Service type：Real-name Authentication Service 
+- Service type：`Real-name Authentication Service` 
 
 - Reference：The `Query DID` interface of [China RealDID](https://did.bsnbase.com) API document.
 
@@ -418,9 +416,9 @@ Use the public key of China RealDID to encrypt the user's `name` + `ID number` u
 
 Use the RealDID identifier to query the corresponding DID document and status.
 
-- JobID：785bc6ee5a0c4feb9c422cdc233c510c
+- JobID：`785bc6ee5a0c4feb9c422cdc233c510c`
 
-- Service type：DID Document Retrieval Service
+- Service type：`DID Document Retrieval Service`
 
 - Reference：The `Query and Downlad DID Document` interface of [China RealDID](https://did.bsnbase.com) API document.
 
