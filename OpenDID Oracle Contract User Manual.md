@@ -108,14 +108,20 @@ contract ATestConsumer is Ownable {
     event OracleRequested(bytes32 indexed requestId);
     event RequestOracleDataFulfilled(bytes32 indexed requestId);
 
-    constructor(address oracleAddress) Ownable(msg.sender) {
-        oracle = DIDOracleRequestInterface(oracleAddress);
+    constructor(address didOracleAddress) Ownable(msg.sender) {
+        oracle = DIDOracleRequestInterface(didOracleAddress);
     }
 
+    // @notice gets the Job fee.
+    // @param jobId The Job Specification ID
+    // @return gasAmount The amount of gas used for job messaging fee
     function quote(string memory jobId) public view returns (uint256) {
         return oracle.quote(stringToBytes32(jobId));
     }
 
+    // @notice Creates the oracle request with the specified job
+    // @param jobId The Job Specification ID
+    // @param data The request parameters associated with jobid
     function requestOracleData(
         string memory jobId,
         string memory data
@@ -132,6 +138,10 @@ contract ATestConsumer is Ownable {
         require(flag, "failed to call oracle");
     }
 
+    // @notice Cancels the oracle request.
+    // @param requestId The fulfillment request ID
+    // @param refundAddress The address to receive the refund
+    // @return Status if the call was successful
     function cancelOracleRequest(
         bytes32 requestId,
         address refundAddress
@@ -141,6 +151,9 @@ contract ATestConsumer is Ownable {
         return flag;
     }
 
+    // @notice Called by the oracle contract to fulfill requests.
+    // @param requestId The fulfillment request ID
+    // @param data The response data
     function oracleResponse(
         bytes32 requestId,
         string calldata data
@@ -149,15 +162,17 @@ contract ATestConsumer is Ownable {
         emit RequestOracleDataFulfilled(requestId);
     }
 
+    // @notice Generates a jobid for the specified nonce.
     function buildRequestId(uint256 nonce) public view returns (bytes32) {
         return keccak256(abi.encodePacked(this, nonce));
     }
 
+    // @notice Converts a string to type bytes32.
     function stringToBytes32(
         string memory source
     ) private pure returns (bytes32 result) {
-        bytes memory tempEmptyStringTest = bytes(source);
-        if (tempEmptyStringTest.length == 0) {
+        bytes memory tempEmptyString = bytes(source);
+        if (tempEmptyString.length == 0) {
             return 0x0;
         }
         assembly {
