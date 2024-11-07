@@ -1,1 +1,3 @@
-什么是OpenDID
+OpenDID is an infrastructure that connects all major asymmetric encryption-based digital identity and decentralized identifier systems, routing encrypted messages between them and enabling developers and business applications to easily register, authenticate, and verify identities and verifiable credentials across diverse platforms.
+
+As a messaging backbone similar to the SWIFT network for identity systems, OpenDID provides two types of Access Points: Web3-based Oracles and Web2-based Gateways. Both access methods are open-source at GitHub and available for public audits.
