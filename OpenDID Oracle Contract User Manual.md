@@ -5,7 +5,7 @@
 [![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://github.com/OpenDID-Labs/developer-docs)
 
 
-**OpenDID Oracle合约供（应用系统）开发者通过应用合约调用，从而实现以Web3-based Oracle方式接入OpenDID。** OpenDID Oracle合约目前已分别在Ethereum Mainnet、Polygon Mainnet、Aptos Mainnet上部署，数据是相互独立的，所以我们建议您按自己的需求选择将应用合约部署在其中一条链上。以下是OpenDID Oracle合约在不同链的合约地址。
+**Application system developers can call the OpenDID Oracle contract through their application contracts. In this way, they can access the OpenDID service in the form of a web3-based oracle.** So far, we have deployed the OpenDID Oracle contract on three public chains: Ethereum Mainnet, Polygon Mainnet and Aptos Mainnet. Since the data on each blockchain is independent, we recommend that you choose one of the chains to deploy application contracts based on business needs. Below are the addresses of the OpenDID Oracle contract on different chains.
 
 * Ethereum Mainnet：`                              `
 
@@ -14,34 +14,34 @@
 * Aptos Mainnet：`                              `
 
 
-:building_construction: **OpenDID Oracle合约内定义的接收应用合约数据的参数是`string`类型的`data`,想要了解'data'的数据结构?** 请查看[OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md) — 包含众多ID System不同job的请求和应答参数的结构说明。
+:building_construction: **In the OpenDID Oracle contract, the parameter defined for application contracts to receive data is `data`, which is of type `string`.** To learn more about the data structure, please refer to [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). This document contains data structures for request and response parameters for various ID System jobs.
 
 > [!IMPORTANT]
-> 在OpenDID Oracle的体系内我们会将验证结果回送给您的应用合约，这一动作会涉及到 GAS 消耗，所以在OpenDID Oracle合约内我们定义了业务费，您可通过jobId查询业务费后发送验证数据。如果您在长达15分钟后还未得到验证结果，便可主动取消验证，我们会即时返还已收取的业务费。
+> After the data verification, the OpenDID service will send the result back to your application contract. This action involves gas consumption. Therefore, in the OpenDID Oracle contract, we have defined a service fee. You can query the service fee by `jobId` before sending the request data. If you have not received the verification result within 15 minutes after sending the request, you can cancel the verification service, and we will refund the paid service fee immediately.
 
 
 ## Table of Contents
 
-- [Ethereum和Polygon](#Ethereum和Polygon)
-    - [查询费用](#查询费用)
-    - [发送验证数据](#发送验证数据)
-    - [接收验证结果](#接收验证结果)
-    - [取消验证请求](#取消验证请求)
+- [Ethereum and Polygon](#ethereum-and-polygon)
+    - [Query Fees](#query-fees)
+    - [Send Verification Data](#send-verification-data)
+    - [Receive Verification Data](#receive-verification-data)
+    - [Cancel Verification Data](#cancel-verification-data)
 - [Aptos](#aptos)
-    - [注册 UA](#注册UA)
-    - [查询费用](#查询费用)
-    - [发送验证数据](#发送验证数据)
-    - [接收验证结果](#接收验证结果)      
+    - [Register UA](#register-ua)
+    - [Query Fees](#query-fees)
+    - [Send Verification Data](#send-verification-data)
+    - [Receive Verification Results](#receive-verification-results)      
 - [Legal](#legal)
 - [Community](#community)
 
 
-## Ethereum和Polygon
+## Ethereum and Polygon
 
 ![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle-EVM.png)
 
-### 查询费用
-应用合约调用 OpenDID Oracle 合约的`quote`方法获取需要支付的业务费，您需在"发送验证数据"时支付这笔业务费。
+### Query Fees
+Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -50,12 +50,12 @@ function quote(bytes32 jobId) external view returns (uint256);
 ```
 
 > [!WARNING]
-> jobId 可通过[OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md)查看，不同的jobID对应的费用也不相同。
+> You can get the parameter of `jobId` in [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). The service fees corresponding to different jobIds are also different.
 
 
-### 发送验证数据
+### Send Verification Data
 
-应用合约调用 OpenDID Oracle 合约的`oracleRequest`方法发送待验证的数据。OpenDID Oracle合约在收到您的请求后，会进行相应的验证并生成唯一的`requestId`。
+Your application contract can call the `oracleRequest` function of the OpenDID Oracle contract to send the data to be verified. After receiving your request, the OpenDID Oracle contract will perform the verification process and generate a unique `requestId`.
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -68,9 +68,9 @@ function oracleRequest(
     ) external payable returns (bool);
 ```
 
-### 接收验证结果
+### Receive Verification Data
 
-应用合约里面需实现 OpenDID Oracle 合约接口定义的`oracleResponse`方法，以便 OpenDID Oracle 合约可以将`requestId`对应的验证结果回送给应用合约。
+You need to incorporate the `oracleResponse` function defined by the OpenDD Oracle contract into your application contract. This way, the OpenDID Oracle contract can send back the verification results corresponding to `requestId` to your application contract.
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -78,9 +78,9 @@ pragma solidity ^0.8.0;
 function oracleResponse(bytes32 requestId, string memory data) external;
 ```
 
-### 取消验证请求
+### Cancel Verification Data
 
-应用合约可以通过调用 OpenDID Oracle 合约的`cancelOracleRequest`方法取消验证。取消后我们会向`refundAddress`即时返还已收取的业务费。
+Your application contract can cancel the data verification by calling the `cancelOracleRequest` function of the OpenDID Oracle contract. After cancellation, we will immediately refund the paid service fees to `refundAddress`.
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -92,7 +92,7 @@ function cancelOracleRequest(
 ```    
 
 
-:mage: **不确定如何开发应用合约？** 请参考以下代码。
+:mage: **Don't know how to develop an application contract?** Please refer to the following example:
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -177,19 +177,19 @@ contract ATestConsumer is Ownable {
 
 ## Aptos
 
-### 注册 UA
-UA 指应用合约内的任意 struct，但每个应用合约只能注册一个 UA。应用合约内可以通过以下方法注册 UA，并且保存返回的`UaCapability<UA>`， 这将在后续的调用中使用。
+### Register UA
+UA refers to any `struct` within an application contract. However, each application contract can only register one UA. You can register a UA into the application contract through the following method. The application contract will save the returned `UaCapability<UA>` and utilize it in subsequent calls.
 
 ```move
 public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 ```    
 
 > [!WARNING]
-> 必须在初始化方法中注册，这样才能验证你使用了自己合约的 UA。
+> You must register the UA in the initialization function of your application contract. This way, we can verify that you are using your own contract's UA.
 
 
-### 查询费用
-应用合约调用 OpenDID Oracle 合约的`get_messaging_fees`方法获取需要支付的业务费，您需在"发送验证数据"时支付这笔业务费。
+### Query Fees
+Your application contract can call the `get_ messaging_fees` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
 
 ```move
 public fun get_messaging_fees(job_id: vector<u8>): u64
@@ -197,12 +197,12 @@ public fun get_messaging_fees(job_id: vector<u8>): u64
 ```
 
 > [!WARNING]
-> job_id 可通过[OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md)查看，不同的job_id对应的费用也不相同。
+> You can get the parameter of `job_id` in [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). The service fees corresponding to different job_ids are also different.
 
 
-### 发送验证数据
+### Send Verification Data
 
-应用合约调用 OpenDID Oracle 合约的`oracle_request<UA>`方法发送待验证的数据。
+Your application contract can call the `oracle_request<UA>` function of the OpenDID Oracle contract to send the data to be verified.
 
 ```move
 public fun oracle_request<UA>(
@@ -218,26 +218,26 @@ public fun oracle_request<UA>(
 ```
 
 > [!WARNING]
-> 必须填写接收验证结果的应用合约地址`callback_address`和模块名称`callback_module`，并且指定不小于“查询费用”的`fee`。
+> You need to to fill in the application contract address `callback_address` and module name `callback_madule` for receiving verification results, and specify the amount of `fee` not less than the queried service fee.
 
 
-### 接收验证结果
+### Receive Verification Results
 
-应用合约里面需实现接收 OpenDID Oracle 回送验证结果的方法。
+Your application contract needs to implement a function for receiving the response of OpenDID Oracle verification results.
 
 ```move
 public entry fun set_oracle_response(request_id: vector<u8>, data: String)
 
 ```
 
-应用合约收到验证结果后，必须调用 OpenDID Oracle 合约的`receive_response<UA>`方法进行验证。
+After receiving the verification results, your application contract needs to call the `receive_response<UA>` function of the OpenDID Oracle contract for verification.
 
 ```move
 public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaCapability<UA>)
 
 ```
 
-:mage: **不确定如何开发应用合约？** 请参考以下代码。
+:mage: **Don't know how to develop an application contract?** Please refer to the following example:
 
 ```move
 module app_example::app {
