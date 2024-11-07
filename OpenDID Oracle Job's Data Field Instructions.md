@@ -7,7 +7,7 @@
 
 
 
-**应用合约调用OpenDID Oracle合约的请求和应答`data`数据域的数据结构说明。** `data`整体是一个`string`类型的值，该值是符合[RFC 8259](https://dl.acm.org/doi/10.17487/RFC8259)标准的一个JSON结构。以下是两个完整的`data`数据域的示例。
+**This document is an explanation of the data structure of `data` in the request and response of the OpenDID Oracle contract called by the application contract.** The `data` is a value of type `string`. It is a standard JSON structure that conforms to [RFC 8259]( https://dl.acm.org/doi/10.17487/RFC8259). Here are two examples of data fields of `data`.
 
 - {"website": "www.opendid.io","email": "contact@opendid.io"}
 - {"result": "true"}
@@ -40,230 +40,229 @@
 
 
 
-## JobID汇总
+## JobID Summary
 
-以下表格是目前OpenDID Oracle可支持的所有JobID的汇总：
+The following table is a summary of all JobIDs currently supported by OpenID Oracle:
 
-|              JobID                   |         业务分类                                    |      ID System Name    |   接入方式  |
+|              JobID                   |         Service Type                               |      ID System Name    |   Access Method  |
 | ------------------------------------ | ---------------------------------------------------|----------------------- | ---------- |
-| `5e4dd148f004f6790bd54d5f7fbd0a38`   | Account Holder Authentication Service              | `Passport XYZ`         |    合约     |
-| `1028e09602ca4bdd89a6bba67212001f`   | Account Holder Authentication Service              | `ENS`                  |    合约     |
-| `d1926a6028d746c89e791bf7ac1b028b`   | Encrypted PII Verification Service                 | `Privado ID`           |    合约     |
-| `05b3af7569d74983bd0895ff273ffc6f`   | Account Holder Authentication Service              | `HashKey DID`          |    合约     |
+| `5e4dd148f004f6790bd54d5f7fbd0a38`   | Account Holder Authentication Service              | `Passport XYZ`         |    Contract     |
+| `1028e09602ca4bdd89a6bba67212001f`   | Account Holder Authentication Service              | `ENS`                  |    Contract     |
+| `d1926a6028d746c89e791bf7ac1b028b`   | Encrypted PII Verification Service                 | `Privado ID`           |    Contract     |
+| `05b3af7569d74983bd0895ff273ffc6f`   | Account Holder Authentication Service              | `HashKey DID`          |    Contract     |
 | `152872f465eb47e09a8047359055e152`   | DID Document Retrieval Service                     | `HashKey DID`          |    API     |
-| `e9692ce7e0de4c03b1d816f42f55b44d`   | Account Holder Authentication Service              | `Farcaster ID`         |    合约     |
-| `8e93566e07fd44ba8ba002f0fe4e7eb8`   | identity Registration Service                      | `Farcaster ID`         |    合约     |
+| `e9692ce7e0de4c03b1d816f42f55b44d`   | Account Holder Authentication Service              | `Farcaster ID`         |    Contract     |
+| `8e93566e07fd44ba8ba002f0fe4e7eb8`   | identity Registration Service                      | `Farcaster ID`         |    Contract     |
 | `48fee62acfaf46f693edce89860369d5`   | Real-name Authentication Service                   | `Terminal3 Identity`   |    API     |
 | `a795b5cb935f49b68b47687e0071751e`   | Account Holder Authentication Service              | `Terminal3 Identity`   |    API     |
-| `509e3db7758f4b61ba35036575f3f3f0`   | Verifiable Credential Issuer Verification Service  | `Terminal3 Identity`   |    合约     |
-| `910529f3dc394bbcad0b3ddd656d2be5`   | Account Holder Authentication Service              | `World ID`             |    合约     |
+| `509e3db7758f4b61ba35036575f3f3f0`   | Verifiable Credential Issuer Verification Service  | `Terminal3 Identity`   |    Contract     |
+| `910529f3dc394bbcad0b3ddd656d2be5`   | Account Holder Authentication Service              | `World ID`             |    Contract     |
 | `9330d9fc54ab48ada8373493b0ef9cf3`   | Real-name Authentication Service                   | `China RealDID`        |    API     |
 | `785bc6ee5a0c4feb9c422cdc233c510c`   | DID Document Retrieval Service                     | `China RealDID`        |    API     |
 
 
-> **Note:** 接入方式为 API 表示 OpenDID Oracle 通过 ID System 提供的相应 API 进行的验证，合约表示 OpenDID Oracle 通过调用 ID System 提供的智能合约相关方法进行的验证。
+> **Note:** If the access method is API, it means that the verification performed by OpenDID Oracle is through calling the APIs provided by the ID System. If the access method is contract, it means that the verification performed by OpenDID Oracle is through calling the functions of the smart contract provided by the ID System.
 
 
 ## Passport XYZ
 
-### 验证持有者
+### Verify the Holder
 
-通过用户的链账户地址，以及对应的私钥对链账户地址采用Secp256k1算法进行签名，验证该账户是否持有passport。
+Verify whether the account holds a passport by verifying the signature of the wallet address signed by the corresponding private key with secp256k1 algorithm.
 
 - JobID：5e4dd148f004f6790bd54d5f7fbd0a38
 
-- 业务分类：Account Holder Authentication Service 
+- Service type：Account Holder Authentication Service 
 
-- 参考资料：Passport XYZ [getPassport](https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference)方法。
+- Reference：Passport XYZ [getPassport](https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference) function.
 
 - Oracle Request Data：
 
-|       名称     |     类型    |      必传  |         描述    |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `address `   | string      |       Y     |   用户链账户地址                  |
-| `signature`  | string      |       Y     |   用户私钥对address的签名值   |
+| `address `   | string      |       Y     |   User's wallet address                  |
+| `signature`  | string      |       Y     |   The signature of address signed by the private key   |
 
 
 - Oracle Response Data：
 
 
-|       名称     |     类型    |      必传  |         描述              |
+|           Name                |       Type      |      Required      |                     Description               |
 | --------------|-------------|-----------|--------------------------|
-| `result`      | bool        |       Y   |    验证的结果              |
+| `result`      | bool        |       Y   |     Verification result              |
 
 
 
 ## ENS
 
-### 验证持有者
+### Verify the Holder
 
-通过domain以及使用私钥对domain内容进行Secp256k1算法的签名，验证该用户的确是domain的Holder。
+Verify whether the the user is the holder of the domain by verifying the signature of the domain signed by the corresponding private key with secp256k1 algorithm.
 
 - JobID：1028e09602ca4bdd89a6bba67212001f
 
-- 业务分类：Account Holder Authentication Service 
+- Service type：Account Holder Authentication Service 
 
-- 参考资料：ENS [owner](https://docs.ens.domains/learn/deployments)方法。
+- Reference：ENS [owner](https://docs.ens.domains/learn/deployments) function.
 
 - Oracle Request Data：
 
-|       名称     |     类型    |      必传  |         描述              |
+|           Name                |       Type      |      Required      |                     Description               |
 | --------------|-------------|-----------|--------------------------|
-| `domain`      | string      |       Y   |   域名                          |
-| `signature`   | string      |       Y   |   用户私钥对domain的签名值   |
+| `domain`      | string      |       Y   |   Domain                           |
+| `signature`   | string      |       Y   |   The signature of domain signed by the private key   |
 
 
 - Oracle Response Data：
 
-|       名称     |     类型    |      必传  |         描述              |
+|           Name                |       Type      |      Required      |                     Description               |
 | --------------|-------------|-----------|--------------------------|
-| `result`      | bool        |       Y   |    验证的结果              |
+| `result`      | bool        |       Y   |    Verification result              |
 
 
 
 
 ## Privado ID
 
-### 查询验证结果
+### Query Verification Results
 
-对于已经知道`requestId`和`sender` 值的验证方，可以查验该用户是否已经做过了持有某个VC的验证。
+For validators who already know the values of `requestId` and `sender`, they can verify whether the user has already been verified to hold a certain VC.
 
 - JobID：d1926a6028d746c89e791bf7ac1b028b
 
-- 业务分类：Encrypted PII Verification Service 
+- Service type：Encrypted PII Verification Service 
 
-- 参考资料：Privado ID [isProofVerified](https://docs.privado.id/docs/smart-contracts)方法。
+- Reference：Privado ID [isProofVerified](https://docs.privado.id/docs/smart-contracts) function.
 
 - Oracle Request Data：
 
-|       名称          |     类型    |      必传  |         描述                                |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------|--------|--------|--------------------------|
-| `requestId `      | uint64     |       Y     |            请求ID                          |
-| `sender `         | address   |       Y     |              待查询用户的钱包地址   |
+| `requestId `      | uint64     |       Y     |           Request ID                           |
+| `sender `         | address   |       Y     |              The user's wallet address to be queried   |
 
 
 
 - Oracle Response Data：
 
-|       名称     |     类型    |      必传  |         描述              |
+|           Name                |       Type      |      Required      |                     Description               |
 | --------------|-------------|-----------|--------------------------|
-| `result`      | bool        |       Y   |    验证的结果              |
+| `result`      | bool        |       Y   |    Verification result              |
 
 
 
 
 ## HashKey DID
 
-### 验证持有者
+### Verify the Holder
 
-通过用户的钱包地址，以及钱包地址对应的私钥对钱包地址采用Secp256k1算法进行签名，验证该账户是否持有HashKey DID。
+Verify whether the account holds HashKey DID by verifying the signature of the wallet address signed by the corresponding private key with secp256k1 algorithm.
 
 - JobID：05b3af7569d74983bd0895ff273ffc6f
 
-- 业务分类：Account Holder Authentication Service 
+- Service type：Account Holder Authentication Service 
 
-- 参考资料：HashKey DID [addrClaimed](https://docs.hashkey.id/protocol/deployments)方法。
+- Reference：HashKey DID [addrClaimed](https://docs.hashkey.id/protocol/deployments) function.
 
 - Oracle Request Data：
 
-|       名称    |     类型    |      必传      |         描述           |
+|           Name                |       Type      |      Required      |                     Description               |
 | -------------|-------------|-------------|------------------------|
-| `account `   | address     |       Y     |   钱包地址              |
-| `signature`  | string      |       Y     |   使用钱包私钥对account参数的签名值   |
+| `account `   | address     |       Y     |   Wallet address              |
+| `signature`  | string      |       Y     |   The signature of account signed by the private key   |
 
 
 - Oracle Response Data：
 
-|       名称     |     类型    |      必传  |         描述              |
+|           Name                |       Type      |      Required      |                     Description               |
 | --------------|-------------|-----------|--------------------------|
-| `result`      | bool        |       Y   |    验证的结果              |
+| `result`      | bool        |       Y   |    Verification result             |
 
 
 
-### 查询DID
+### Query DID
 
-根据用户的HashKey DID标识符查询相关数据。
+Query relevant data based on the user's HashKey DID identifier.
 
 - JobID：152872f465eb47e09a8047359055e152
 
-- 业务分类：DID Document Retrieval Service
+- Service type：DID Document Retrieval Service
 
-- 参考资料：HashKey DID [Get DID info](https://docs.hashkey.id/developers/api-reference/openapi)方法。
+- Reference：HashKey DID [Get DID info](https://docs.hashkey.id/developers/api-reference/openapi) function.
 
 - Oracle Request Data：
 
-|     名称     |     类型  |      必传 |      描述            |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------| ----------|----------| --------------------|
-| `did`       | string    |       Y  |    DID标识符         |
+| `did`       | string    |       Y  |    DID identifier         |
 
 
 - Oracle Response Data：
 
-|    名称    |       类型   |      必传      |    描述       |
+|           Name                |       Type      |      Required      |                     Description               |
 |-----------|--------------|---------------|--------------|
-| `result`  | string       |       Y       |    关联数据    |
+| `result`  | string       |       Y       |    Related data     |
 
 
 
 
 ## Farcaster ID
 
-### 验证持有者
+### Verify the Holder
 
-来验证您的应用创建的签名密钥请求。
-通过 fid、公钥、以及使用私钥进行EIP-712签名的值，验证该账户是否持有Farcaster ID。
+Verify whether the account holds a Farcaster ID by using the FID, public key, and EIP-712 signature signed by the private key.
 
 - JobID：e9692ce7e0de4c03b1d816f42f55b44d
 
-- 业务分类：Account Holder Authentication Service 
+- Service type：Account Holder Authentication Service 
 
-- 参考资料：Farcaster ID [validate](https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator)方法。
+- Reference：Farcaster ID [validate](https://docs.farcaster.xyz/reference/contracts/reference/signed-key-request-validator) function.
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |            描述             |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `fid`                    | uint256           |       Y         |    与公钥关联的主fid          |
-| `key`                     | bytes            |       Y         |   要验证的公钥               |
-| `sig`                     | bytes            |       Y         |   EIP-712实体的签名值              |
+| `fid`                    | uint256           |       Y         |    The primary FID corresponding to the public key          |
+| `key`                     | bytes            |       Y         |   The public key to be verified               |
+| `sig`                     | bytes            |       Y         |   The signature of EIP-712 entity             |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    验证的结果          |
+| `result`                    | bool           |       Y         |   Verification result           |
 
 
 
-### 注册ID
+### Register ID
 
-还未拥有 fid 的用户可以注册一个新的 FID。
+Users who have not yet owned a FID can register a new FID.
 
-note：将新的 fid 注册到特定地址并支付存储费用。接收地址必须签署 EIP-712 注册消息以批准注册。接收者必须尚未拥有 fid。
+note：You need to register the new FID at a specific address and pay the storage fee. The receiving address must sign the EIP-712 registration message to approve registration. The recipient must not yet possess the FID.
 
 - JobID：8e93566e07fd44ba8ba002f0fe4e7eb8
 
-- 业务分类：identity Registration Service
+- Service type：identity Registration Service
 
-- 参考资料：Farcaster ID [registerFor](https://docs.farcaster.xyz/reference/contracts/reference/id-gateway)方法。
+- Reference：Farcaster ID [registerFor](https://docs.farcaster.xyz/reference/contracts/reference/id-gateway) function.
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `weiValue`                    | wei           |       Y         |    注册需支付的金额        |
-| `to`                     | address            |       Y         |   注册 fid 的地址       |
-| `recovery`                     | address            |       Y         |   新 fid 的恢复地址    |
-| `deadline`                    | uint256           |       Y         |    签名过期时间戳        |
-| `sig`                     | bytes            |       Y         |  来自 to 地址的EIP-712签名       |
-| `extraStorage`                     | uint256           |       N        |   额外的存储单元    |
+| `weiValue`                    | wei           |       Y         |    The amount to be paid for registration        |
+| `to`                     | address            |       Y         |   The address to register the FID       |
+| `recovery`                     | address            |       Y         |   New FID's recovery address    |
+| `deadline`                    | uint256           |       Y         |    The timestamp of the deadline of the signature         |
+| `sig`                     | bytes            |       Y         |  The EIP-712 signature of the receiving address       |
+| `extraStorage`                     | uint256           |       N        |   Extra storage unit    |
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    注册的结果          |
+| `result`                    | bool           |       Y         |    Rgistration result         |
 
 
 
@@ -271,16 +270,16 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 ## Terminal3 Identity
 
 
-### 查验用户信息
+### Verify User Information
 
-通过
+
 
 
 - JobID：48fee62acfaf46f693edce89860369d5
 
-- 业务分类：Real-name Authentication Service
+- Service type：Real-name Authentication Service
 
-- 参考资料：Terminal3 Identity
+- Reference：Terminal3 Identity
 
 - Oracle Request Data：
 
@@ -289,155 +288,154 @@ note：将新的 fid 注册到特定地址并支付存储费用。接收地址�
 
 
 
-### 验证用户钱包地址
+### Verify User's Wallet Address
 
-通过userId、walletAddress以及钱包地址的私钥对walletAddress进行Secp256k1算法的签名，验证该用户的确是userId的Holder。
-
+By verifying the userId, walletAddress, and the signature of walletAddress signed by the corresponding private key with secp256k1 algorithm to confirm that the user is indeed the holder of that userId.
 
 - JobID：a795b5cb935f49b68b47687e0071751e
 
-- 业务分类：Account Holder Authentication Service
+- Service type：Account Holder Authentication Service
 
-- 参考资料：Terminal3 Identity [Get Wallet Addresses](https://terminal3.readme.io/reference/get-user-wallet-addresses)方法。
+- Reference：Terminal3 Identity [Get Wallet Addresses](https://terminal3.readme.io/reference/get-user-wallet-addresses) function.
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `userId`                    | int32           |       Y         |    用户ID          |
-| `walletAddress`                    | string           |       Y         |    用户钱包地址         |
-| `signature`                    | string           |       Y         |    用户钱包地址的私钥对WalletAddress的签名值        |
+| `userId`                    | int32           |       Y         |    User ID          |
+| `walletAddress`                    | string           |       Y         |    User's wallet address         |
+| `signature`                    | string           |       Y         |    The signature of WalletAddress signed by the private key of the user's wallet address        |
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-|          result          | boolean           |       Y         |    验证结果          |
+|          result          | boolean           |       Y         |    Verification Result          |
 
 
 
-### 验证签发者身份
+### Verify the Issuer's Identity
 
-通过用户ID和签发者地址，验证用户ID的签发者身份。
+Verify the issuer's identity of the user ID through the user ID and issuer address.
 
 
 - JobID：509e3db7758f4b61ba35036575f3f3f0
 
-- 业务分类：Verifiable Credential Issuer Verification Service
+- Service type：Verifiable Credential Issuer Verification Service
 
-- 参考资料：Terminal3 Identity [Create User](https://terminal3.readme.io/reference/create-user-from-client)方法。
+- Reference：Terminal3 Identity [Create User](https://terminal3.readme.io/reference/create-user-from-client) function.
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `did`                    | string           |       Y         |    用户ID          |
-| `issuerAddress`                    | address           |       Y         |    要验证的签发者地址         |
+| `did`                    | string           |       Y         |    User ID          |
+| `issuerAddress`                    | address           |       Y         |   The issuer's address to be verified         |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-|          result          | boolean           |       Y         |    验证结果          |
+|          result          | boolean           |       Y         |    Verification Result          |
 
 
 
 
 ## World ID
 
-### 验证World ID
+### Verify the World ID
 
-通过World ID根以及证明数据，验证World ID是否为实际本人。
+Verify whether the World ID is the actual person through the World ID root and proof data.
 
 - JobID：910529f3dc394bbcad0b3ddd656d2be5
 
-- 业务分类：Account Holder Authentication Service 
+- Service type：Account Holder Authentication Service 
 
-- 参考资料：World ID [verifyProof](https://docs.world.org/world-id/reference/contracts)方法。
+- Reference：World ID [verifyProof](https://docs.world.org/world-id/reference/contracts) function.
 
 - Oracle Request Data：
 
-|           名称     |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `root`                    | uint256           |       Y         |    要验证的World ID根       |
-| `groupId`                     | uint256            |       Y         |   要验证的凭证类型。目前仅支持填 1      |
-| `signalHash`                     | uint256            |       Y         |   要验证的信号的 keccak256 哈希值      |
-| `nullifierHash`                    | uint256           |       Y         |    当前操作的匿名用户ID      |
-| `externalNullifierHash`                     | uint256            |       Y         |   标识用户正在验证的应用程序和操作的 keccak256 哈希值       |
-| `proof`                     | uint256[8]            |       Y         |   从 IDKit 获取的十六进制字符串证明要验证的零知识证明    |
+| `root`                    | uint256           |       Y         |    The World ID root to be verified       |
+| `groupId`                     | uint256            |       Y         |   The credential type to be verified. Currently is `1` only     |
+| `signalHash`                     | uint256            |       Y         |   The  keccak256 hash value of the signal to be verified      |
+| `nullifierHash`                    | uint256           |       Y         |    The anonymous User ID      |
+| `externalNullifierHash`                     | uint256            |       Y         |   The keccak256 hash value that identifies the application and operation being verified by the user       |
+| `proof`                     | uint256[8]            |       Y         |   The zero-knowledge-proof data to verify the hexadecimal string obtained from IDKit    |
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `result`                    | bool           |       Y         |    验证的结果          |
+| `result`                    | bool           |       Y         |   Verification result           |
 
 
 
 
 ## China RealDID
 
-### 查验DID
+### Verify the DID
 
-使用China RealDID的公钥对用户`姓名`+`身份证号码`使用sm2p256v1算法进行加密，并使用sm3算法对`姓名`+`身份证号码`进行哈希，查验该用户是否申领过实名DID。请求时也可传入实名DID文档内的公钥索引，如果该用户申领过实名DID则同时返回该索引对应的公钥值。
+Use the public key of China RealDID to encrypt the user's `name` + `ID number` using the sm2p256v1 algorithm, and use the sm3 algorithm to hash the string of `name` + `ID number` to check whether the user has applied for a China RealDID. When requesting, you can also pass in the public key index in the DID document. If the user has applied for a RealDID, the corresponding public key value of that index will be returned at the same time.
 
 
 - JobID：9330d9fc54ab48ada8373493b0ef9cf3
 
-- 业务分类：Real-name Authentication Service 
+- Service type：Real-name Authentication Service 
 
-- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档`验证DID`接口。
+- Reference：The `Query DID` interface of [China RealDID](https://did.bsnbase.com) API document.
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `authApplyRetainData`                    | string           |       Y         |    个人用户信息加密字段          |
-| `publicKeyIndex`                     | Integer            |       N         |   实名DID文档中的公钥索引       |
-| `authHash`    | string            |       Y        |    使用SM3算法对姓名+身份证号进行哈希计算后的哈希值 |
+| `authApplyRetainData`                    | string           |       Y         |    Natrual person user information encryption field          |
+| `publicKeyIndex`                     | Integer            |       N         |   Public key index in realName DID document       |
+| `authHash`    | string            |       Y        |    The hash value after hashing `name` + `ID number` using SM3 algorithm |
 
 
-- authApplyRetainData说明：
+- authApplyRetainData：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `idNo`                    | String           |       Y         |    个人用户的身份证号码         |
-| `name`                    | String           |       Y         |    个人用户身份证上的姓名         |
+| `idNo`                    | String           |       Y         |    User's ID number         |
+| `name`                    | String           |       Y         |    User's real name on the ID card         |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `did`                    | String           |       Y         |    实名DID标识          |
-| `publicKey`                    | String           |       N         |    publicKeyIndex在DID文档中对应的公钥          |
+| `did`                    | String           |       Y         |    RealDID identifer          |
+| `publicKey`                    | String           |       N         |    The publicKeyIndex corresponds to the public key in the DID document          |
 
 
 
-### 查询DID文档
+### Query DID Document
 
-使用实名DID标识符查询对应的DID文档以及状态。
+Use the RealDID identifier to query the corresponding DID document and status.
 
 - JobID：785bc6ee5a0c4feb9c422cdc233c510c
 
-- 业务分类：DID Document Retrieval Service
+- Service type：DID Document Retrieval Service
 
-- 参考资料：[China RealDID](https://did.bsnbase.com) 技术接口文档`查询下载DID文档`接口。
+- Reference：The `Query and Downlad DID Document` interface of [China RealDID](https://did.bsnbase.com) API document.
 
 - Oracle Request Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `did`                    | string           |       Y         |    DID标识符         |
+| `did`                    | string           |       Y         |    RealDID identifier         |
 
 
 - Oracle Response Data：
 
-|           名称                |       类型      |      必传      |                     描述               |
+|           Name                |       Type      |      Required      |                     Description               |
 | ------------------| ----------|----------| ----------------------|
-| `didDocument`                    | string           |       Y         |    DID文档          |
-| `status`                    | string           |       Y         |    0：正常，1：注销        |
+| `didDocument`                    | string           |       Y         |   DID document          |
+| `status`                    | string           |       Y         |   0: Normal，1: Revoked        |
 
 
 ## Legal
