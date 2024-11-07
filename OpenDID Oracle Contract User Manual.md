@@ -3,8 +3,8 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/CONTRIBUTING.html)
 [![Code Lines](https://tokei.rs/b1/github/WeBankBlockchain/WeBASE?category=code)](https://github.com/OpenDID-Labs/contracts)
 [![GitHub (pre-)release](https://img.shields.io/github/release/WeBankBlockchain/WeBASE/all.svg)](https://github.com/WeBankBlockchain/WeBASE/releases)
-[![license](http://img.shields.io/badge/license-Apache%20v2-red.svg)](http://www.apache.org/licenses/)
-[![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://docs.openzeppelin.com/contracts)
+[![license](https://img.shields.io/badge/license-MIT-red.svg)](https://mit-license.org/)
+[![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://github.com/OpenDID-Labs/developer-docs)
 
 
 **OpenDID Oracle合约供（应用系统）开发者通过应用合约调用，从而实现以Web3-based Oracle方式接入OpenDID。** OpenDID Oracle合约目前已分别在Ethereum Mainnet、Polygon Mainnet、Aptos Mainnet上部署，数据是相互独立的，所以我们建议您按自己的需求选择将应用合约部署在其中一条链上。以下是OpenDID Oracle合约在不同链的合约地址。
