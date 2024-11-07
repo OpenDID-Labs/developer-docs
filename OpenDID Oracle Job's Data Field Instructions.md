@@ -1,10 +1,11 @@
 # <img src="logo.svg" alt="OpenDID" height="40px">
 
 
-  <a href="https://circleci.com/gh/Open-Attestation/token-registry/tree/master" alt="Circle CI"><img src="https://img.shields.io/circleci/build/github/Open-Attestation/token-registry/master" /></a>
-  <a href="https://codecov.io/gh/Open-Attestation/token-registry" alt="Code Coverage"><img src="https://codecov.io/gh/Open-Attestation/token-registry/branch/master/graph/badge.svg?token=Y4R9SWXATG" /></a>
-  <a href="https://www.npmjs.com/package/@govtechsg/token-registry" alt="NPM"><img src="https://img.shields.io/npm/dw/@govtechsg/token-registry" /></a>
-  <img src="https://img.shields.io/github/license/open-attestation/token-registry" />
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://opendid.io)
+[![license](https://img.shields.io/badge/license-MIT-red.svg)](https://mit-license.org/)
+[![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://github.com/OpenDID-Labs/developer-docs)
+
+
 
 **应用合约调用OpenDID Oracle合约的请求和应答`data`数据域的数据结构说明。** `data`整体是一个`string`类型的值，该值是符合[RFC 8259](https://dl.acm.org/doi/10.17487/RFC8259)标准的一个JSON结构。以下是两个完整的`data`数据域的示例。
 
