@@ -14,29 +14,28 @@
 
 ## Table of Contents
 
-- [JobID汇总](#installation)
+- [JobID Summary](#jobid-summary)
 - [Passport XYZ](#passport-xyz)
-  - [验证持有者](#验证持有者)
+  - [Verify the Holder](#verify-the-holder)
 - [ENS](#ens)
-  - [验证持有者](#验证持有者)
+  - [Verify the Holder](#verify-the-holder)
 - [Privado ID](#privado-id)
-  - [查询验证结果](#查询验证结果)      
+  - [Query Verification Results](#query-verification-results)      
 - [HashKey DID](#hashkey-did)
-  - [验证持有者](#验证持有者)
-  - [查询DID文档](#查询did文档)
+  - [Verify the Holder](#verify-the-holder)
+  - [Query DID](#query-did)
 - [Farcaster ID](#farcaster-id)
-  - [验证持有者](#验证持有者)
-  - [注册ID](#注册ID)
+  - [Verify the Holder](#verify-the-holder)
+  - [Register ID](#register-id)
 - [Terminal3 Identity](#terminal3-identity)
-  - [查验用户信息](#查验用户信息)
-  - [验证用户钱包地址](#验证用户钱包地址)
-  - [验证签发者身份](#验证签发者身份)
+  - [Verify User Information](#verify-user-information)
+  - [Verify User's Wallet Address](#verify-user's-wallet-address)
+  - [Verify the Issuer's Identity](#verify-the-issuer's-identity)
 - [World ID](#world-id)
-  - [验证World ID](#验证world-id)
+  - [Verify the World ID](#verify-the-world-id)
 - [China RealDID](#china-realdid)
-  - [查验DID](#查验did)
-  - [查询DID文档](#查询did文档)
-
+  - [Verify the DID](#verify-the-did)
+  - [Query DID Document](#query-did-document)
 
 
 
@@ -61,7 +60,8 @@ The following table is a summary of all JobIDs currently supported by OpenID Ora
 | `785bc6ee5a0c4feb9c422cdc233c510c`   | DID Document Retrieval Service                     | `China RealDID`        |    API     |
 
 
-> **Note:** If the access method is API, it means that the verification performed by OpenDID Oracle is through calling the APIs provided by the ID System. If the access method is contract, it means that the verification performed by OpenDID Oracle is through calling the functions of the smart contract provided by the ID System.
+> [!WARNING]
+> If the access method is API, it means that the verification performed by OpenDID Oracle is through calling the APIs provided by the ID System. If the access method is contract, it means that the verification performed by OpenDID Oracle is through calling the functions of the smart contract provided by the ID System.
 
 
 ## Passport XYZ
@@ -239,7 +239,8 @@ Verify whether the account holds a Farcaster ID by using the FID, public key, an
 
 Users who have not yet owned a FID can register a new FID.
 
-note：You need to register the new FID at a specific address and pay the storage fee. The receiving address must sign the EIP-712 registration message to approve registration. The recipient must not yet possess the FID.
+> [!WARNING]
+> You need to register the new FID at a specific address and pay the storage fee. The receiving address must sign the EIP-712 registration message to approve registration. The recipient must not yet possess the FID.
 
 - JobID：8e93566e07fd44ba8ba002f0fe4e7eb8
 
