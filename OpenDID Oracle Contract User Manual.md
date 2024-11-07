@@ -1,8 +1,6 @@
 # <img src="logo.svg" alt="OpenDID" height="40px">
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE/CONTRIBUTING.html)
-[![Code Lines](https://tokei.rs/b1/github/WeBankBlockchain/WeBASE?category=code)](https://github.com/OpenDID-Labs/contracts)
-[![GitHub (pre-)release](https://img.shields.io/github/release/WeBankBlockchain/WeBASE/all.svg)](https://github.com/WeBankBlockchain/WeBASE/releases)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://opendid.io)
 [![license](https://img.shields.io/badge/license-MIT-red.svg)](https://mit-license.org/)
 [![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](https://github.com/OpenDID-Labs/developer-docs)
 
