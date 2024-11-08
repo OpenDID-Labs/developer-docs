@@ -93,7 +93,7 @@ function cancelOracleRequest(
 ```    
 
 
-:mage: **Don't know how to develop an application contract?** Please refer to the following example:
+:mage: **How to develop an application contract?** Please refer to the following example:
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -267,7 +267,7 @@ public fun cancel_oracle_request<UA>(request_id: vector<u8>,  _cap: &UaCapabilit
 ```
 
 
-:mage: **Don't know how to develop an application contract?** Please refer to the following example:
+:mage: **How to develop an application contract?** Please refer to the following example:
 
 ```move
 module app_example::app {
