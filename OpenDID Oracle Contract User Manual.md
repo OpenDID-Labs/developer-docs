@@ -6,7 +6,7 @@
 
 **Application system developers can call the OpenDID Oracle contract through their application contracts. In this way, they can access the OpenDID service in the form of a web3-based oracle.** So far, we have deployed the OpenDID Oracle contract on three public chains: Ethereum Mainnet, Polygon Mainnet and Aptos Mainnet. Since the data on each blockchain is independent, we recommend that you choose one of the chains to deploy application contracts based on business needs. Below are the addresses of the OpenDID Oracle contract on different chains.
 
-* Ethereum: [0x9bf35821b61fbb66dc1d7557b7cb150ab568cdc6](https://etherscan.io/address/0x9bf35821b61fbb66dc1d7557b7cb150ab568cdc6)
+* Ethereum: [0x9Bf35821B61fBB66dC1D7557b7cB150ab568CDc6](https://etherscan.io/address/0x9Bf35821B61fBB66dC1D7557b7cB150ab568CDc6)
 
 * Polygon: [0xdde4cE6F8484ed882A463BBdF9d691DC8bb4E48E](https://polygonscan.com/address/0xdde4cE6F8484ed882A463BBdF9d691DC8bb4E48E)
 
@@ -231,7 +231,7 @@ public fun oracle_request<UA>(
 ```
 
 > [!WARNING]
-> You need to to fill in the application contract address `callback_address` and module name `callback_madule` for receiving verification results, and specify the amount of `fee` not less than the amount of `queried service fee` * `GasPrice`.
+> You need to to fill in the application contract address `callback_address` and module name `callback_module` for receiving verification results, and specify the amount of `fee` not less than the amount of `queried service fee` * `GasPrice`.
 
 
 ### Receive Verification Results
@@ -378,3 +378,4 @@ Your use of this Project is governed by the terms found at www.opendid.io (the "
 Contact us: contact@opendid.io
 
 Website: www.opendid.io
+d
