@@ -38,6 +38,8 @@
 
 ## Ethereum and Polygon
 
+![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Contract-EVM.png)
+
 ### Query Fees
 
 Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the amount of `callback gas`. The total amount of fee you need to pay for this request is `callback gas` * `gasPrice`.
@@ -190,6 +192,9 @@ contract ATestConsumer is Ownable {
 ```  
 
 ## Aptos
+
+![image](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Contract-Aptos.png)
+
 
 ### Register UA
 UA refers to any `struct` within an application contract. However, each application contract can only register one UA. You can register a UA into the application contract through the following method. The application contract will save the returned `UaCapability<UA>` and utilize it in subsequent calls.
