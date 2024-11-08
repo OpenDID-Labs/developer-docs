@@ -30,7 +30,8 @@
     - [Register UA](#register-ua)
     - [Query Fees](#query-fees)
     - [Send Verification Data](#send-verification-data)
-    - [Receive Verification Results](#receive-verification-results)      
+    - [Receive Verification Results](#receive-verification-results)
+    - [Cancel Verification Data](#cancel-verification-data)     
 - [Legal](#legal)
 - [Community](#community)
 
@@ -242,16 +243,16 @@ public entry fun set_oracle_response(request_id: vector<u8>)
 
 ```
 
-After receiving the verification results, your application contract needs to call the `receive_response<UA>` function of the OpenDID Oracle contract for verification.
+After receiving the verification results, your application contract needs to call the `receive_response<UA>` function of the OpenDID Oracle contract for query.
 
 ```move
-public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaCapability<UA>): String 
+public fun receive_response<UA>(request_id: vector<u8>, _cap: &UaCapability<UA>): String 
 
 ```
 
 ### Cancel Verification Data
 
-Your application contract can cancel the data verification by calling the `cancel_Oracle_Request` function of the OpenDID Oracle contract. After cancellation, we will immediately refund the paid service fees to `refundAddress`.
+Your application contract can cancel the data verification by calling the `cancel_Oracle_Request` function of the OpenDID Oracle contract with `request_id`. If successful, the AptosCoin you have paid for this request will be refunded to your application contract. The calling method is as follows:
 
 ```move
 public fun cancel_oracle_request<UA>(request_id: vector<u8>,  _cap: &UaCapability<UA>):coin::Coin<AptosCoin>
