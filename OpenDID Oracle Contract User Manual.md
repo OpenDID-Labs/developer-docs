@@ -201,10 +201,10 @@ public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 
 
 ### Query Fees
-Your application contract can call the `get_ messaging_fees` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
+Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
 
 ```move
-public fun get_messaging_fees(job_id: vector<u8>): u64
+public fun quote(job_id: vector<u8>): u64
 
 ```
 
@@ -230,7 +230,7 @@ public fun oracle_request<UA>(
 ```
 
 > [!WARNING]
-> You need to to fill in the application contract address `callback_address` and module name `callback_madule` for receiving verification results, and specify the amount of `fee` not less than the queried service fee.
+> You need to to fill in the application contract address `callback_address` and module name `callback_madule` for receiving verification results, and specify the amount of `fee` not less than the amount of `queried service fee` * `GasPrice`.
 
 
 ### Receive Verification Results
@@ -238,16 +238,26 @@ public fun oracle_request<UA>(
 Your application contract needs to implement a function for receiving the response of OpenDID Oracle verification results.
 
 ```move
-public entry fun set_oracle_response(request_id: vector<u8>, data: String)
+public entry fun set_oracle_response(request_id: vector<u8>)
 
 ```
 
 After receiving the verification results, your application contract needs to call the `receive_response<UA>` function of the OpenDID Oracle contract for verification.
 
 ```move
-public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaCapability<UA>)
+public fun receive_response<UA>(request_id: vector<u8>, data: String, _cap: &UaCapability<UA>): String 
 
 ```
+
+### Cancel Verification Data
+
+Your application contract can cancel the data verification by calling the `cancel_Oracle_Request` function of the OpenDID Oracle contract. After cancellation, we will immediately refund the paid service fees to `refundAddress`.
+
+```move
+public fun cancel_oracle_request<UA>(request_id: vector<u8>,  _cap: &UaCapability<UA>):coin::Coin<AptosCoin>
+
+```
+
 
 :mage: **Don't know how to develop an application contract?** Please refer to the following example:
 
