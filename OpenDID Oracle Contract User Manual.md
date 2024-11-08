@@ -16,7 +16,7 @@
 :building_construction: **In the OpenDID Oracle contract, the parameter defined for application contracts to receive data is `data`, which is of type `string`.** To learn more about the data structure, please refer to [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). This document contains data structures for request and response parameters for various ID System jobs.
 
 > [!IMPORTANT]
-> After the data verification, the OpenDID service will send the result back to your application contract. This action involves gas consumption. Therefore, in the OpenDID Oracle contract, we have defined a service fee. You can query the service fee by `jobId` before sending the request data. If you have not received the verification result within 15 minutes after sending the request, you can cancel the verification service, and we will refund the paid service fee immediately.
+> After the data verification, the OpenDID service will send the result back to your application contract. This action involves gas consumption. Therefore, in the OpenDID Oracle contract, we have defined a service fee. You can query the service fee by `jobId` before sending the request data. If you have not received the verification result within 15 minutes after sending the request, you can cancel the verification service, and we will refund the payment for this request. 
 
 
 ## Table of Contents
@@ -39,7 +39,8 @@
 ## Ethereum and Polygon
 
 ### Query Fees
-Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
+
+Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the amount of `callback gas`. The total amount of fee you need to pay for this request is `callback gas` * `gasPrice`.
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -48,7 +49,7 @@ function quote(bytes32 jobId) external view returns (uint256);
 ```
 
 > [!WARNING]
-> You can get the parameter of `jobId` in [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). The service fees corresponding to different jobIds are also different.
+> You can get the parameter of `jobId` in [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md).
 
 
 ### Send Verification Data
@@ -78,7 +79,7 @@ function oracleResponse(bytes32 requestId, string memory data) external;
 
 ### Cancel Verification Data
 
-Your application contract can cancel the data verification by calling the `cancelOracleRequest` function of the OpenDID Oracle contract. After cancellation, we will immediately refund the paid service fees to `refundAddress`.
+Your application contract can cancel the data verification by calling the `cancelOracleRequest` function of the OpenDID Oracle contract. If successful, you have paid for this request will be refunded to `refundAddress`. 
 
 ```solidity
 pragma solidity ^0.8.0;
@@ -202,7 +203,8 @@ public fun register_ua<UA>(account: &signer): UaCapability<UA>;
 
 
 ### Query Fees
-Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the service fee that needs to be paid. You will pay this service fee when sending the verification data.
+
+Your application contract can call the `quote` function of the OpenDID Oracle contract to obtain the amount of `callback gas`. The total amount of fee you need to pay for this request is `callback gas` * `gasPrice`.
 
 ```move
 public fun quote(job_id: vector<u8>): u64
@@ -210,7 +212,7 @@ public fun quote(job_id: vector<u8>): u64
 ```
 
 > [!WARNING]
-> You can get the parameter of `job_id` in [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). The service fees corresponding to different job_ids are also different.
+> You can get the parameter of `job_id` in [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md).
 
 
 ### Send Verification Data
