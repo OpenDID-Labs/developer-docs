@@ -6,11 +6,11 @@
 
 **Application system developers can call the OpenDID Oracle contract through their application contracts. In this way, they can access the OpenDID service in the form of a web3-based oracle.** So far, we have deployed the OpenDID Oracle contract on three public chains: Ethereum Mainnet, Polygon Mainnet and Aptos Mainnet. Since the data on each blockchain is independent, we recommend that you choose one of the chains to deploy application contracts based on business needs. Below are the addresses of the OpenDID Oracle contract on different chains.
 
-* Ethereum Mainnet: `                              `
+* Ethereum Mainnet: `[0x9bf35821b61fbb66dc1d7557b7cb150ab568cdc6](https://etherscan.io/address/0x9bf35821b61fbb66dc1d7557b7cb150ab568cdc6)`
 
-* Polygon Mainnet: `                              `
+* Polygon Mainnet: `[0xdde4cE6F8484ed882A463BBdF9d691DC8bb4E48E](https://polygonscan.com/address/0xdde4cE6F8484ed882A463BBdF9d691DC8bb4E48E)`
 
-* Aptos Mainnet: `                              `
+* Aptos Mainnet: `[0x9aa6e4e0e6fe912d2a9d413bf4111810c7a4c15bf90e8938ccbcc21f516e93ff](https://explorer.aptoslabs.com/object/0x9aa6e4e0e6fe912d2a9d413bf4111810c7a4c15bf90e8938ccbcc21f516e93ff?network=mainnet)`
 
 
 :building_construction: **In the OpenDID Oracle contract, the parameter defined for application contracts to receive data is `data`, which is of type `string`.** To learn more about the data structure, please refer to [OpenDID Oracle Job's Data Field Instructions](https://github.com/OpenDID-Labs/developer-docs/blob/main/OpenDID%20Oracle%20Job's%20Data%20Field%20Instructions.md). This document contains data structures for request and response parameters for various ID System jobs.
